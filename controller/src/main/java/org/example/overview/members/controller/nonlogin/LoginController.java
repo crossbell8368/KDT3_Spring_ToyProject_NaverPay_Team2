@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-// 새롭게 생성한 url 수정된 버전입니다.
+// 20221107 생성한 url 수정된 버전입니다.
 @Controller
 @RequestMapping("/")
 public class LoginController {
 
-    private SessionMgr sessionMgr; // = SessionMgr.getInstance();
-    private CookieMgr cookieMgr; // = CookieMgr.getInstance();
-    private MemberService memberService ; //= MemberService.getInstance();
+    private SessionMgr sessionMgr;
+    private CookieMgr cookieMgr;
+    private MemberService memberService ;
 
 
     @Autowired
@@ -39,17 +39,6 @@ public class LoginController {
             return "redirect:/";
         }
 
-        String autoLogin = cookieMgr.get(request, "AUTO_LOGIN");
-        String cookieId = cookieMgr.get(request, "COOKIE_ID");
-
-
-        if (autoLogin != null && cookieId != null) {
-            if (memberService.autoLogin(autoLogin, cookieId)) {
-                sessionMgr.create(session, cookieId);
-                view = "redirect:/";
-            }
-        }
-
         return view;
     }
 
@@ -64,7 +53,6 @@ public class LoginController {
         if (memberDTO != null) {
             sessionMgr.create(session, uId);
 
-            saveCookieForAutoLogin(uId, save, response);
 
             view = "redirect:/";
             respStatus = Status.SUCCESS;
@@ -76,14 +64,6 @@ public class LoginController {
 
         return view;
 
-    }
-
-    private void saveCookieForAutoLogin(String uId, String save, HttpServletResponse response) {
-        if (save == null) return;
-
-        if (save.equals("on")) {
-            cookieMgr.create(response, new String[] {uId, "true"});
-        }
     }
 
 }
