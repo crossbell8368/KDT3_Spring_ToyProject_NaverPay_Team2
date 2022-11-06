@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/members")
+@RequestMapping("/login")
 public class LogoutController { // 로그아웃 컨트롤러
     private MemberService memberService; // = MemberService.getInstance();
 
