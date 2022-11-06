@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-// 새롭게 생성한 Login 브런치 입니다.
+// 새롭게 생성한 url 수정된 버전입니다.
 @Controller
 @RequestMapping("/")
 public class LoginController {
