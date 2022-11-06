@@ -6,41 +6,37 @@ public class Member {
     private String uId = "";
     private String uPw = "";
     private String uEmail = "";
+    private String uPhoneNumber = "";
 
     public Member() {
     }
 
-    public Member(String uId, String uPw) {
-        this.uId = uId;
-        this.uPw = uPw;
-    }
-
-    public Member(String uId, String uPw, String uEmail) {
+    public Member(String uId, String uPw, String uEmail, String uPhoneNumber) {
         this.uId = uId;
         this.uPw = uPw;
         this.uEmail = uEmail;
+        this.uPhoneNumber = uPhoneNumber;
     }
-    
+
     public MemberDTO toDTO() {
-        return new MemberDTO(uId, uPw, uEmail, false);
+        return new MemberDTO(uId, uPw, uEmail, uPhoneNumber);
     }
 
     public String getuId() {
         return uId;
     }
 
-
     public String getuPw() {
         return uPw;
     }
-
 
     public String getuEmail() {
         return uEmail;
     }
 
-
-
+    public String getuPhoneNumber() {
+        return uPhoneNumber;
+    }
 
     @Override
     public String toString() {
@@ -48,6 +44,7 @@ public class Member {
                 "uId='" + uId + '\'' +
                 ", uPw='" + uPw + '\'' +
                 ", uEmail='" + uEmail + '\'' +
+                ", uPhoneNumber='" + uPhoneNumber + '\'' +
                 '}';
     }
 }
