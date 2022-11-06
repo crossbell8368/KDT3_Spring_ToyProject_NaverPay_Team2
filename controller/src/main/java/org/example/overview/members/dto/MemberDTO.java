@@ -1,6 +1,5 @@
 package org.example.overview.members.dto;
 
-import jakarta.validation.constraints.*;
 import org.example.overview.members.entity.Member;
 import org.example.overview.members.vo.MemberVO;
 import org.springframework.stereotype.Component;
@@ -8,12 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberDTO {
 
-    @Size(min = 0, max = 0, message = "uId Error")
     private String uId = "";
-
-    private Password uPw = null;
-
+    private String uPw = "";
     private String uEmail = "";
+    private String uPhoneNumber = "";
 
 
     public MemberDTO() {
@@ -23,34 +20,24 @@ public class MemberDTO {
         this.uId = uId;
     }
 
-    public MemberDTO(String uId, String uPw, boolean needEncode) {
-        this.uId = uId;
-        this.uPw = needEncode ? Password.of(uPw, true) : Password.of(uPw, false);
-    }
-
-    public MemberDTO(String uId, Password uPw) {
+    public MemberDTO(String uId, String uPw) {
         this.uId = uId;
         this.uPw = uPw;
     }
 
-    public MemberDTO(String uId, String uPw, String uEmail, boolean needEncode) {
-        this.uId = uId;
-        this.uPw = needEncode ? Password.of(uPw, true) : Password.of(uPw, false);
-        this.uEmail = uEmail;
-    }
-
-    public MemberDTO(String uId, Password uPw, String uEmail) {
+    public MemberDTO(String uId, String uPw, String uEmail, String uPhoneNumber) {
         this.uId = uId;
         this.uPw = uPw;
         this.uEmail = uEmail;
+        this.uPhoneNumber = uPhoneNumber;
     }
 
     public Member toEntity() {
-        return new Member(uId, getuPwStr(), uEmail);
+        return new Member(uId, uPw, uEmail, uPhoneNumber);
     }
 
-    public MemberVO toVO() {
-        return new MemberVO(uId, uEmail);
+    public MemberVO toVo() {
+        return new MemberVO(uId, uPw, uEmail, uPhoneNumber);
     }
 
     public String getuId() {
@@ -61,15 +48,11 @@ public class MemberDTO {
         this.uId = uId;
     }
 
-    public Password getuPw() {
+    public String getuPw() {
         return uPw;
     }
 
-    public String getuPwStr() {
-        return uPw.getuPw();
-    }
-
-    public void setuPw(Password uPw) {
+    public void setuPw(String uPw) {
         this.uPw = uPw;
     }
 
@@ -81,14 +64,21 @@ public class MemberDTO {
         this.uEmail = uEmail;
     }
 
+    public String getuPhoneNumber() {
+        return uPhoneNumber;
+    }
 
+    public void setuPhoneNumber(String uPhoneNumber) {
+        this.uPhoneNumber = uPhoneNumber;
+    }
 
     @Override
     public String toString() {
         return "MemberDTO{" +
                 "uId='" + uId + '\'' +
-                ", uPw=" + uPw +
+                ", uPw='" + uPw + '\'' +
                 ", uEmail='" + uEmail + '\'' +
+                ", uPhoneNumber='" + uPhoneNumber + '\'' +
                 '}';
     }
 }
