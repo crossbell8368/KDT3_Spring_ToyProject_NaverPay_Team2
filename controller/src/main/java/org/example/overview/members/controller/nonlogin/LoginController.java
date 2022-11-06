@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 // 새롭게 생성한 Login 브런치 입니다.
 @Controller
-@RequestMapping("/members")
+@RequestMapping("/")
 public class LoginController {
 
     private SessionMgr sessionMgr; // = SessionMgr.getInstance();
@@ -33,7 +33,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, HttpSession session) {
-        String view = "members/nonlogin/login";
+        String view = "login";
 
         if (session.getAttribute("SESSION_ID") != null) { // 로그인이 되어있는 상태
             return "redirect:/";
