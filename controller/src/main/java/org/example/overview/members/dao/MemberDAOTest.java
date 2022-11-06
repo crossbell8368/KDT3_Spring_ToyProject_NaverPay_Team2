@@ -1,23 +1,16 @@
 package org.example.overview.members.dao;
 
-import org.example.overview.members.dto.Password;
 import org.example.overview.members.entity.Member;
 
 public class MemberDAOTest {
-    private MemberDAO memberDAO = new MemberDAO();
-
-    public void addMembers() {
-        int res = memberDAO.deleteAll();
-//        if (res == 0) return;
-
-        for (int i = 'a'; i <= 'z'; i++) {
-            memberDAO.insert(new Member(Character.toString(i), Password.of(Character.toString(i) + "1234", true).getuPw(), Character.toString(i) + "@gmail.com"));
-        }
-
-        memberDAO.selectAll().stream().forEach(m -> System.out.println(m));
-    }
-
     public static void main(String[] args) {
-        new MemberDAOTest().addMembers();
+
+        MemberDAO memberDAO = new MemberDAO();
+        for (int i = 'a'; i <= 'f'; i++) {
+            String alpha = Character.toString(i);
+            memberDAO.insert(new Member(alpha, alpha + "1234",
+                    alpha + "@gmail.com", "010-0000-000" + (i - 97)));
+        }
+        memberDAO.selectAll().stream().forEach(members -> System.out.println(members));
     }
 }
