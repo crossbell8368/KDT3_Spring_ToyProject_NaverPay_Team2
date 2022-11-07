@@ -1,7 +1,10 @@
-package org.example.overview.members.vo;
+package org.example.overview.members.dto;
 
-import java.util.Objects;
-public class ShoppingVO {
+import org.example.overview.members.entity.Prod;
+import org.example.overview.members.vo.ProdVO;
+
+public class ProdDTO {
+
     private String uId="";
     private int orderNo;
     private String orderDate;
@@ -14,24 +17,11 @@ public class ShoppingVO {
     private int status;
     private int review;
 
-    public ShoppingVO() {
+    public ProdDTO(){
+
     }
 
-    public ShoppingVO(String uId, int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
-        this.uId = uId;
-        this.orderNo = orderNo;
-        this.orderDate = orderDate;
-        this.manufacture = manufacture;
-        this.productInfo = productInfo;
-        this.cost = cost;
-        this.productCount = productCount;
-        this.seller = seller;
-        this.sellNum = sellNum;
-        this.status = status;
-        this.review = review;
-    }
-
-    public ShoppingVO(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+    public ProdDTO(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
         this.orderNo = orderNo;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
@@ -43,71 +33,100 @@ public class ShoppingVO {
         this.status = status;
     }
 
+    public Shopping toEntity(){return new Shopping(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
+    public ShoppingVO toVO(){return new ShoppingVO(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
+
     public String getuId() {
         return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
     public int getOrderNo() {
         return orderNo;
     }
 
+    public void setOrderNo(int orderNo) {
+        this.orderNo = orderNo;
+    }
+
     public String getOrderDate() {
         return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 
     public String getManufacture() {
         return manufacture;
     }
 
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
+    }
+
     public String getProductInfo() {
         return productInfo;
+    }
+
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
     }
 
     public String getCost() {
         return cost;
     }
 
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
     public int getProductCount() {
         return productCount;
+    }
+
+    public void setProductCount(int productCount) {
+        this.productCount = productCount;
     }
 
     public String getSeller() {
         return seller;
     }
 
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
     public String getSellNum() {
         return sellNum;
+    }
+
+    public void setSellNum(String sellNum) {
+        this.sellNum = sellNum;
     }
 
     public int getStatus() {
         return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public int getReview() {
         return review;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ShoppingVO shoppingVO = (ShoppingVO) o;
-        return orderNo == shoppingVO.orderNo && productCount == shoppingVO.productCount
-                && status == shoppingVO.status && review == shoppingVO.review && uId.equals(shoppingVO.uId)
-                && orderDate.equals(shoppingVO.orderDate) && manufacture.equals(shoppingVO.manufacture)
-                && productInfo.equals(shoppingVO.productInfo) && cost.equals(shoppingVO.cost)
-                && seller.equals(shoppingVO.seller) && sellNum.equals(shoppingVO.sellNum);
+    public void setReview(int review) {
+        this.review = review;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(uId, orderNo, orderDate, manufacture, productInfo, cost, productCount, seller, sellNum, status, review);
-    }
-
 
     @Override
     public String toString() {
-        return "ShoppingVO{" +
+        return "ProdDTO{" +
                 "uId='" + uId + '\'' +
                 ", orderNo=" + orderNo +
                 ", orderDate='" + orderDate + '\'' +

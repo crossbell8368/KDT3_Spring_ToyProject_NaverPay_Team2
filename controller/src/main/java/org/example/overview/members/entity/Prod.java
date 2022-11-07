@@ -1,6 +1,6 @@
 package org.example.overview.members.entity;
 
-public class Shopping {
+public class Prod {
     /*
     Id / 주문번호 / 주문일 / 제조사 / 상품내역 / 상품금액 / 상품수량 / 판매자이름 / 판매자 전화번호 / 결제상태 / 주문내역
      */
@@ -16,10 +16,10 @@ public class Shopping {
     private int status;
     private int review;
 
-    public Shopping() {
+    public Prod() {
     }
 
-    public Shopping(String uId, int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
+    public Prod(String uId, int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
         this.uId = uId;
         this.orderNo = orderNo;
         this.orderDate = orderDate;
@@ -33,7 +33,7 @@ public class Shopping {
         this.review = review;
     }
 
-    public Shopping(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+    public Prod(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
         this.orderNo = orderNo;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
@@ -47,7 +47,7 @@ public class Shopping {
 
     @Override
     public String toString() {
-        return "Shopping{" +
+        return "Prod{" +
                 "uId='" + uId + '\'' +
                 ", orderNo=" + orderNo +
                 ", orderDate='" + orderDate + '\'' +
