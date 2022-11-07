@@ -65,7 +65,9 @@ public class LoginController {
 
 
         System.out.println("로그인 성공 여부 : " + session.getAttribute("login"));
-        System.out.println(memberService.findUserByuId(uId).toVo());
+        if (session.getAttribute("login") == Status.SUCCESS) {
+            System.out.println(memberService.findUserByuId(uId).toVo());
+        }
 
         return view;
     }
