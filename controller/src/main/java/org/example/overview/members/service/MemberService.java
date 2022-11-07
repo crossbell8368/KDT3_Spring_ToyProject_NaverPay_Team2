@@ -28,4 +28,14 @@ public class MemberService implements IMemberService{
         }
         return null;
     }
+
+    @Override
+    public MemberDTO findUserByuId(String inputId) {
+        if (inputId == null) return null;
+
+        Member member = memberDAO.select(inputId);
+        if (member == null) return null;
+
+        return member.toDTO();
+    }
 }
