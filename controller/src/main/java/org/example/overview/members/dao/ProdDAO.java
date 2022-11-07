@@ -2,6 +2,7 @@ package org.example.overview.members.dao;
 
 import org.example.overview.members.database.JDBCMgr;
 import org.example.overview.members.entity.Member;
+import org.example.overview.members.entity.Prod;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -15,48 +16,46 @@ import java.util.stream.Collectors;
 @Repository
 public class ProdDAO implements IProdDAO {
 
+    // Class Member =====================================================
     private Connection conn = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
 
-    private static final String PROD_SELECT_ALL = "select * from PROD where USER_ID like ?";
-    private static final String PROD_SEARCH_DATE = "select * from PROD where ORDER_DATE between cast(? as DATE) and cast(? as DATE)";
+    // SQL =====================================================
+    private static final String PROD_SEARCH = "select * from PROD where USER_ID like ?";
     private static final String PROD_SELECT = "select * from PROD where ORDER_NO = ?";
+    private static final String PROD_SEARCH_DATE = "select * from PROD where ORDER_DATE between cast(? as DATE) and cast(? as DATE)";
+    private static final String PROD_SELECT_ALL = "select * from PROD";
+    private static final String PROD_INSERT = "insert into member values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String PROD_DELETE = "delete PROD where ORDER_NO = ?";
     private static final String PROD_DELETE_ALL = "delete PROD";
 
-
-    //private static final String PROD_INSERT = "insert into member values(?, ?, ?)";
-    //private static final String MEMBER_PASSWORD_UPDATE = "update member set uPw = ? where uId = ?";
-//    public MemberDAO () {
-//        System.out.println("MemberDAO()");
-//    }
-
-//    public static MemberDAO getInstance() {
-//        if (memberDAO == null) {
-//            memberDAO = new MemberDAO();
-//        }
-//        return memberDAO;
-//    }
-
+    // Method =====================================================
     @Override
-    public List<Prod> selectAll(String uid) {
+    public List<Prod> search(String uid) {
         // 해당 ID에 해당되는 모든 상품정보 LOAD
-        // List<Member> memberList = new LinkedList<>();
-        // Prod entity 완성 후 작업
+        List<Prod> prodList = new LinkedList<>();
+
         try {
             conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(PROD_SELECT_ALL);
+            stmt = conn.prepareStatement(PROD_SEARCH);
             stmt.setString(1, "%" + uid + "%");
-            //stmt.setString(2, "%" + q + "%");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                //String mId = rs.getString("uId");
-                //String uPw = rs.getString("uPw");
-                //String uEmail = rs.getString("uEmail");
-                //memberList.add(new Member(mId, uPw, uEmail));
-                // Prod entity 완성 후 작업
+                prodList.add(new Prod(
+                        rs.getString("USER_ID"),
+                        rs.getString("ORDER_NO"),
+                        rs.getString("ORDER_DATE"),
+                        rs.getString("PROD_MANUF"),
+                        rs.getString("PROD_INFO"),
+                        rs.getString("PROD_COST"),
+                        rs.getString("PROD_CNT"),
+                        rs.getString("PROD_SELLER"),
+                        rs.getString("PROD_SELLNUM"),
+                        rs.getString("PROD_STATUS"),
+                        rs.getString("PROD_REVIEW")
+                ));
             }
 
         } catch (SQLException e) {
@@ -71,8 +70,8 @@ public class ProdDAO implements IProdDAO {
     @Override
     public Prod select(String pNo) {
         // 특정상품 선택 => 상세페이지로 접근시
-        // Prod prod = null;
-        // Prod entity 완성 후 작업
+        Prod prod = null;
+
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_SELECT);
@@ -81,15 +80,20 @@ public class ProdDAO implements IProdDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                /*
-                String mId = rs.getString("uId");
-                String mPw = rs.getString("uPw");
-                String mEmail = rs.getString("uEmail");
-                member = new Member(mId, mPw, mEmail);
-                Prod entity 완성 후 작업
-                 */
+                prod = new Prod(
+                        rs.getString("USER_ID"),
+                        rs.getString("ORDER_NO"),
+                        rs.getString("ORDER_DATE"),
+                        rs.getString("PROD_MANUF"),
+                        rs.getString("PROD_INFO"),
+                        rs.getString("PROD_COST"),
+                        rs.getString("PROD_CNT"),
+                        rs.getString("PROD_SELLER"),
+                        rs.getString("PROD_SELLNUM"),
+                        rs.getString("PROD_STATUS"),
+                        rs.getString("PROD_REVIEW")
+                );
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -102,8 +106,8 @@ public class ProdDAO implements IProdDAO {
     public List<Prod> selectDate(String start, String end) {
         // 날짜로 검색한 데이터결과
         // 해당 ID에 해당되는 모든 상품정보 LOAD
-        // List<Prod> prodList = new LinkedList<>();
-        // Prod entity 완성 후 작업
+        List<Prod> prodList = new LinkedList<>();
+
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_SEARCH_DATE);
@@ -112,11 +116,19 @@ public class ProdDAO implements IProdDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                //String mId = rs.getString("uId");
-                //String uPw = rs.getString("uPw");
-                //String uEmail = rs.getString("uEmail");
-                //memberList.add(new Member(mId, uPw, uEmail));
-                // Prod entity 완성 후 작업
+                prodList.add(new Prod(
+                        rs.getString("USER_ID"),
+                        rs.getString("ORDER_NO"),
+                        rs.getString("ORDER_DATE"),
+                        rs.getString("PROD_MANUF"),
+                        rs.getString("PROD_INFO"),
+                        rs.getString("PROD_COST"),
+                        rs.getString("PROD_CNT"),
+                        rs.getString("PROD_SELLER"),
+                        rs.getString("PROD_SELLNUM"),
+                        rs.getString("PROD_STATUS"),
+                        rs.getString("PROD_REVIEW")
+                ));
             }
 
         } catch (SQLException e) {
@@ -125,6 +137,60 @@ public class ProdDAO implements IProdDAO {
             JDBCMgr.close(rs, stmt, conn);
         }
         return prodList;
+    }
+    public List<Prod> selectAll() {
+        List<Prod> prodList = new LinkedList<>();
+        try {
+            conn = JDBCMgr.getConnection();
+            stmt = conn.prepareStatement(PROD_SELECT_ALL);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                prodList.add(new Prod(
+                        rs.getString("USER_ID"),
+                        rs.getString("ORDER_NO"),
+                        rs.getString("ORDER_DATE"),
+                        rs.getString("PROD_MANUF"),
+                        rs.getString("PROD_INFO"),
+                        rs.getString("PROD_COST"),
+                        rs.getString("PROD_CNT"),
+                        rs.getString("PROD_SELLER"),
+                        rs.getString("PROD_SELLNUM"),
+                        rs.getString("PROD_STATUS"),
+                        rs.getString("PROD_REVIEW")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCMgr.close(rs, stmt, conn);
+        }
+        return prodList;
+    }
+    public int insert(Prod prod) {
+        int res = 0;
+        try {
+            conn = JDBCMgr.getConnection();
+            stmt = conn.prepareStatement(PROD_INSERT);
+            stmt.setString(1, prod.getuId());
+            stmt.setString(2, prod.getOrderNo());
+            stmt.setString(3, prod.getOrderDate());
+            stmt.setString(1, prod.getManufacture());
+            stmt.setString(2, prod.getProductInfo());
+            stmt.setString(3, prod.getCost());
+            stmt.setString(1, prod.getProductCount());
+            stmt.setString(2, prod.getSeller());
+            stmt.setString(3, prod.getSellNum());
+            stmt.setString(1, prod.getStatus());
+            stmt.setString(2, prod.getReview());
+            res = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCMgr.close(stmt, conn);
+        }
+        return res;
     }
 
     @Override
@@ -158,45 +224,5 @@ public class ProdDAO implements IProdDAO {
         return res;
     }
 
-/*
-    @Override
-    public int insert(Member member) {
-        int res = 0;
-        try {
-            conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(MEMBER_INSERT);
-            stmt.setString(1, member.getuId());
-            stmt.setString(2, member.getuPw());
-            stmt.setString(3, member.getuEmail());
-            res = stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCMgr.close(stmt, conn);
-        }
-        return res;
-    }
-
-    @Override
-    public int insertAll(List<Member> members) {
-        return members.stream().map(m -> insert(m)).collect(Collectors.toList()).stream().reduce((x, y) -> x + y).orElse(0);
-    }
-    @Override
-    public int update(String uId, String uPw) {
-        int res = 0;
-        try {
-            conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(MEMBER_PASSWORD_UPDATE);
-            stmt.setString(1, uPw);
-            stmt.setString(2, uId);
-            res = stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCMgr.close(stmt, conn);
-        }
-        return res;
-    }
- */
 }
 
