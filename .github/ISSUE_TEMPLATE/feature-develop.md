@@ -1,5 +1,5 @@
 ---
-name: Feature request
+name: Feature Develop
 about: 기능 및 페이지 추가 시
 title: ''
 labels: ''
