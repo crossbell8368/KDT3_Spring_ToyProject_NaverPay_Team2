@@ -10,7 +10,7 @@ public class JDBCMgr { // h2 DB 연결
 
         try {
             DriverManager.registerDriver(new org.h2.Driver());
-            conn = DriverManager.getConnection("jdbc:h2:~/JDBC", "sa", "");
+            conn = DriverManager.getConnection("jdbc:h2:~/NaverPayTeam2", "sa", "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
