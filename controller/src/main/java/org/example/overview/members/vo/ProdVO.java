@@ -109,8 +109,7 @@ public class ProdVO {
     @Override
     public String toString() {
         return "ProdVO{" +
-                "uId='" + uId + '\'' +
-                ", oId=" + oId +
+                "oId=" + oId +
                 ", orderDate='" + orderDate + '\'' +
                 ", manufacture='" + manufacture + '\'' +
                 ", productInfo='" + productInfo + '\'' +

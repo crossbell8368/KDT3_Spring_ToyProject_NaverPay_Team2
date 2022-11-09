@@ -45,7 +45,9 @@ public class ProdDTO {
     }
 
     //public Prod toEntity(){return new Shopping(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
-    public ProdVO toVO(){return new ProdVO(oId, orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
+    public ProdVO toVO() {
+        return new ProdVO(oId, orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);
+    }
 
     public String getuId() {
         return uId;
