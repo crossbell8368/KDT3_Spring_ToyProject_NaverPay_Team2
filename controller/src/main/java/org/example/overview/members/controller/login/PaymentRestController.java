@@ -3,9 +3,7 @@ package org.example.overview.members.controller.login;
 
 import org.example.overview.members.dto.PaymentDTO;
 import org.example.overview.members.dto.ProdDTO;
-import org.example.overview.members.entity.Prod;
-import org.example.overview.members.vo.PaymentVO;
-import org.example.overview.members.vo.ProdVO;
+import org.example.overview.members.vo.DetailVO;
 import org.example.overview.members.service.PaymentService;
 import org.example.overview.members.service.ProdService;
 import org.example.overview.utils.Status;
