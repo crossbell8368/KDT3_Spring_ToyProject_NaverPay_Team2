@@ -38,7 +38,8 @@ public class LoginController {
         String view = "/members/nonlogin/login";
 
         if (session.getAttribute("SESSION_ID") != null) {
-            return "redirect:/";
+            System.out.println("이미 로그인 되어있습니다.");
+            return "redirect:/payhome";
         }
 
         return view;
@@ -52,21 +53,23 @@ public class LoginController {
         String view = loginPage(request, session);
         Status respStatus = Status.FAIL;
 
-        MemberDTO memberDTO = memberService.login(uId, uPw);
-        if (memberDTO != null) {
-            sessionMgr.create(session, uId);
+        if (!view.equals("redirect:/payhome")) {
+            MemberDTO memberDTO = memberService.login(uId, uPw);
+            if (memberDTO != null) {
+                sessionMgr.create(session, uId);
 
-            view = "redirect:/";
-            respStatus = Status.SUCCESS;
-        }
+                view = "redirect:/payhome";
+                respStatus = Status.SUCCESS;
+            }
 
-        session.setAttribute("login", respStatus);
-        model.addAttribute("uId", session.getAttribute("SESSION_ID"));
+            session.setAttribute("login", respStatus);
+            model.addAttribute("uId", session.getAttribute("SESSION_ID"));
 
 
-        System.out.println("로그인 성공 여부 : " + session.getAttribute("login"));
-        if (session.getAttribute("login") == Status.SUCCESS) {
-            System.out.println(memberService.findUserByuId(memberDTO.getuId()).toVo());
+            System.out.println("로그인 성공 여부 : " + session.getAttribute("login"));
+            if (session.getAttribute("login") == Status.SUCCESS) {
+                System.out.println(memberService.findUserByuId(memberDTO.getuId()).toVo());
+            }
         }
 
         return view;
