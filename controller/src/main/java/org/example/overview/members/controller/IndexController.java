@@ -22,9 +22,10 @@ public class IndexController {
         this.sessionMgr = sessionMgr;
     }
 
+    // TODO: request -> get
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(Model model, HttpSession session) {
-        System.out.println("GET/, indexPage() 메서드 실행");
+        System.out.println("indexPage() 메서드 실행");
 
         if (session.getAttribute("SESSION_ID") != null) {
             model.addAttribute("uId", sessionMgr.get(session));

@@ -33,7 +33,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, HttpSession session) {
-        System.out.println("GET/login, loginPage() 메서드 실행");
+        System.out.println("loginPage() 메서드 실행");
 
         String view = "/members/nonlogin/login";
 
@@ -47,7 +47,7 @@ public class LoginController {
     @PostMapping("/login")
     public String doLogin(@RequestParam String uId, @RequestParam String uPw, Model model,
                           HttpServletRequest request, HttpSession session) {
-        System.out.println("POST/login, doLogin() 메서드 실행");
+        System.out.println("doLogin() 메서드 실행");
 
         String view = loginPage(request, session);
         Status respStatus = Status.FAIL;
