@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/payhome") // TODO: URL 수정
+@RequestMapping("/")
 public class PayhomeController { // 유저 검색 페이지 컨트롤러
 
     private String uId;
@@ -34,7 +34,7 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         System.out.println("searchPage() 메서드 실행");
         // 로그인 후 등장하는 페이지 컨트롤러
         // 로그인ID에 해당되는 모든 결제상품 출력
-        String view = "members/login/search";
+        String view = "members/login/payhome";
 
         if (session.getAttribute("SESSION_ID") == null) {
             return "redirect:/";
@@ -46,10 +46,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         }
 
         List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
+        printProd(prodDTOList);
 
-        if (prodDTOList != null) {
-            return parseListToJSONArrayString(prodDTOList);
-        }
         return view;
     }
 
@@ -64,65 +62,62 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         uId = sessionMgr.get(session);
 
         if ((start == null || start.equals("")) || (end == null || end.equals(""))){
-            return getAllProd(uId);
+            List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
+            printProd(prodDTOList);
         }
 
         List<ProdDTO> prodDTOList = prodService.getProdlistByDate(uId, start, end);
-
-        if (prodDTOList != null) {
-            return parseListToJSONArrayString(prodDTOList);
-        }
-        return "";
-    }
-
-    // TODO: Service 로 이전?
-    public String getAllProd(String uId){
-        List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
-        if (prodDTOList != null) {
-            return parseListToJSONArrayString(prodDTOList);
-        }
+        printProd(prodDTOList);
 
         return "";
     }
 
-    // TODO: Service 로 이전
-    public String parseListToJSONArrayString(List<ProdDTO> prodDTOList) {
-        JSONArray jsonArray = new JSONArray(); // List<Map<>>
-        for (int i = 0; i < prodDTOList.size(); i++) {
-            Map<String, String> map = new HashMap<>();
-            map.put("uId", prodDTOList.get(i).getuId());
-            map.put("oId", prodDTOList.get(i).getOrderNo());
-            map.put("ORDER_DATE", prodDTOList.get(i).getOrderDate());
-            map.put("PROD_MANUF", prodDTOList.get(i).getManufacture());
-            map.put("PROD_INFO", prodDTOList.get(i).getProductInfo());
-            map.put("PROD_COST", prodDTOList.get(i).getCost());
-            map.put("PROD_CNT", prodDTOList.get(i).getProductCount());
-            map.put("PROD_SELLER", prodDTOList.get(i).getSeller());
-            map.put("PROD_SELLNUM", prodDTOList.get(i).getSellNum());
-            map.put("PROD_STATUS", prodDTOList.get(i).getStatus());
-            map.put("PROD_REVIEW", prodDTOList.get(i).getReview());
-
-            JSONObject jsonObject = new JSONObject(map);
-            jsonArray.put(jsonObject);
+    public void printProd(List<ProdDTO> prodDTOList) {
+        if (prodDTOList != null) {
+            for (int i = 0; i < prodDTOList.size(); i++) {
+                System.out.println(prodDTOList.get(i));
+            }
         }
-        return jsonArray.toString();
     }
 
-    public String parseObjectToJSONObjectString(ProdDTO prodDTO) {
-        Map<String, String> map = new HashMap<>();
-        map.put("uId", prodDTO.getuId());
-        map.put("oId", prodDTO.getOrderNo());
-        map.put("ORDER_DATE", prodDTO.getOrderDate());
-        map.put("PROD_MANUF", prodDTO.getManufacture());
-        map.put("PROD_INFO", prodDTO.getProductInfo());
-        map.put("PROD_COST", prodDTO.getCost());
-        map.put("PROD_CNT", prodDTO.getProductCount());
-        map.put("PROD_SELLER", prodDTO.getSeller());
-        map.put("PROD_SELLNUM", prodDTO.getSellNum());
-        map.put("PROD_STATUS", prodDTO.getStatus());
-        map.put("PROD_REVIEW", prodDTO.getReview());
+    // TODO: 이거 굳이필요한가?
+    // public String parseListToJSONArrayString(List<ProdDTO> prodDTOList) {
+    //     JSONArray jsonArray = new JSONArray(); // List<Map<>>
+    //     for (int i = 0; i < prodDTOList.size(); i++) {
+    //         Map<String, String> map = new HashMap<>();
+    //         map.put("uId", prodDTOList.get(i).getuId());
+    //         map.put("oId", prodDTOList.get(i).getOrderNo());
+    //         map.put("ORDER_DATE", prodDTOList.get(i).getOrderDate());
+    //         map.put("PROD_MANUF", prodDTOList.get(i).getManufacture());
+    //         map.put("PROD_INFO", prodDTOList.get(i).getProductInfo());
+    //         map.put("PROD_COST", prodDTOList.get(i).getCost());
+    //         map.put("PROD_CNT", prodDTOList.get(i).getProductCount());
+    //         map.put("PROD_SELLER", prodDTOList.get(i).getSeller());
+    //         map.put("PROD_SELLNUM", prodDTOList.get(i).getSellNum());
+    //         map.put("PROD_STATUS", prodDTOList.get(i).getStatus());
+    //         map.put("PROD_REVIEW", prodDTOList.get(i).getReview());
+    //
+    //         JSONObject jsonObject = new JSONObject(map);
+    //         jsonArray.put(jsonObject);
+    //     }
+    //     return jsonArray.toString();
+    // }
 
-        JSONObject jsonObject = new JSONObject(map);
-        return jsonObject.toString();
-    }
+    // public String parseObjectToJSONObjectString(ProdDTO prodDTO) {
+    //     Map<String, String> map = new HashMap<>();
+    //     map.put("uId", prodDTO.getuId());
+    //     map.put("oId", prodDTO.getOrderNo());
+    //     map.put("ORDER_DATE", prodDTO.getOrderDate());
+    //     map.put("PROD_MANUF", prodDTO.getManufacture());
+    //     map.put("PROD_INFO", prodDTO.getProductInfo());
+    //     map.put("PROD_COST", prodDTO.getCost());
+    //     map.put("PROD_CNT", prodDTO.getProductCount());
+    //     map.put("PROD_SELLER", prodDTO.getSeller());
+    //     map.put("PROD_SELLNUM", prodDTO.getSellNum());
+    //     map.put("PROD_STATUS", prodDTO.getStatus());
+    //     map.put("PROD_REVIEW", prodDTO.getReview());
+    //
+    //     JSONObject jsonObject = new JSONObject(map);
+    //     return jsonObject.toString();
+    // }
 }

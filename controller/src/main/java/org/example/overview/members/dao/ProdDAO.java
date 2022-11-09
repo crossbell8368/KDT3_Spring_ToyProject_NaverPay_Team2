@@ -34,7 +34,7 @@ public class ProdDAO implements IProdDAO {
     public List<Prod> selectAll(String uId) {
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
-        int cnt = 0;
+        // int cnt = 0;
 
         try {
             conn = JDBCMgr.getConnection();
@@ -56,8 +56,8 @@ public class ProdDAO implements IProdDAO {
                         rs.getString("PROD_STATUS"),
                         rs.getString("PROD_REVIEW")
                 ));
-                System.out.println(prodList.get(cnt).toString());
-                cnt++;
+                // System.out.println(prodList.get(cnt).toString());
+                // cnt++;
             }
 
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class ProdDAO implements IProdDAO {
         // 날짜로 검색한 데이터결과
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
-        int cnt = 0;
+        // int cnt = 0;
 
         try {
             conn = JDBCMgr.getConnection();
@@ -134,8 +134,8 @@ public class ProdDAO implements IProdDAO {
                             rs.getString("PROD_STATUS"),
                             rs.getString("PROD_REVIEW")
                     ));
-                    System.out.println(prodList.get(cnt).toString());
-                    cnt++;
+                    // System.out.println(prodList.get(cnt).toString());
+                    // cnt++;
                 }
             }
 
