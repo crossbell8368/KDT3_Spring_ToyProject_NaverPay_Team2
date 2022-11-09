@@ -1,4 +1,4 @@
-package org.example.overview.members.VO;
+package org.example.overview.members.vo;
 
 import java.util.Objects;
 

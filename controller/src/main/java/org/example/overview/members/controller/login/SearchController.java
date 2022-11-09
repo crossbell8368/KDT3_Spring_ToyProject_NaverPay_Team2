@@ -46,7 +46,7 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
         return view;
     }
 
-
+/*
     @PostMapping("/search")
     @ResponseBody
     public String findByUserIdOrEmail(@RequestParam String q, HttpSession session) {
@@ -78,6 +78,7 @@ public class SearchController { // 유저 검색 페이지 컨트롤러
         return "";
     }
 
+ */
     public String parseListToJSONArrayString(List<MemberDTO> memberDTOList) {
         JSONArray jsonArray = new JSONArray(); // List<Map<>>
         for (int i = 0; i < memberDTOList.size(); i++) {

@@ -22,23 +22,22 @@ public class ProdDAO implements IProdDAO {
     private ResultSet rs = null;
 
     // SQL =====================================================
-    private static final String PROD_SEARCH = "select * from PROD where USER_ID like ?";
+    private static final String PROD_SELECT_ALL = "select * from PROD where USER_ID like ?";
     private static final String PROD_SELECT = "select * from PROD where ORDER_NO = ?";
     private static final String PROD_SEARCH_DATE = "select * from PROD where ORDER_DATE between cast(? as DATE) and cast(? as DATE)";
-    private static final String PROD_SELECT_ALL = "select * from PROD";
-    private static final String PROD_INSERT = "insert into member values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String PROD_INSERT = "insert into PROD values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String PROD_DELETE = "delete PROD where ORDER_NO = ?";
-    private static final String PROD_DELETE_ALL = "delete PROD";
+    private static final String PROD_DELETE_ALL = "delete PROD where USER_ID = ?";
 
     // Method =====================================================
     @Override
-    public List<Prod> search(String uid) {
+    public List<Prod> selectAll(String uid) {
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
 
         try {
             conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(PROD_SEARCH);
+            stmt = conn.prepareStatement(PROD_SELECT_ALL);
             stmt.setString(1, "%" + uid + "%");
 
             rs = stmt.executeQuery();
@@ -68,14 +67,14 @@ public class ProdDAO implements IProdDAO {
     }
 
     @Override
-    public Prod select(String pNo) {
+    public Prod select(String oId) {
         // 특정상품 선택 => 상세페이지로 접근시
         Prod prod = null;
 
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_SELECT);
-            stmt.setString(1, pNo);
+            stmt.setString(1, oId);
 
             rs = stmt.executeQuery();
 
@@ -140,38 +139,7 @@ public class ProdDAO implements IProdDAO {
         }
         return prodList;
     }
-    public List<Prod> selectAll(String uId) {
-        List<Prod> prodList = new LinkedList<>();
-        try {
-            conn = JDBCMgr.getConnection();
-            stmt = conn.prepareStatement(PROD_SELECT_ALL);
 
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                if(rs.getString("USER_ID") == uId){
-                    prodList.add(new Prod(
-                            rs.getString("USER_ID"),
-                            rs.getString("ORDER_NO"),
-                            rs.getString("ORDER_DATE"),
-                            rs.getString("PROD_MANUF"),
-                            rs.getString("PROD_INFO"),
-                            rs.getString("PROD_COST"),
-                            rs.getString("PROD_CNT"),
-                            rs.getString("PROD_SELLER"),
-                            rs.getString("PROD_SELLNUM"),
-                            rs.getString("PROD_STATUS"),
-                            rs.getString("PROD_REVIEW")
-                    ));
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCMgr.close(rs, stmt, conn);
-        }
-        return prodList;
-    }
     public int insert(Prod prod) {
         int res = 0;
         try {
@@ -198,12 +166,12 @@ public class ProdDAO implements IProdDAO {
     }
 
     @Override
-    public int delete(String pNo) {
+    public int delete(String oId) {
         int res = 0;
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_DELETE);
-            stmt.setString(1, pNo);
+            stmt.setString(1, oId);
             res = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -214,11 +182,12 @@ public class ProdDAO implements IProdDAO {
     }
 
     @Override
-    public int deleteAll() {
+    public int deleteAll(String uId) {
         int res = 0;
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_DELETE_ALL);
+            stmt.setString(1, uId);
             res = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

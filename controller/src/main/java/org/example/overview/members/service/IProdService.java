@@ -14,14 +14,14 @@ public interface IProdService {
     boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
      */
 
-    List<ProdDTO> listByDate(String uId, String start, String end);
+    List<ProdDTO> getProdlistByDate(String uId, String start, String end);
 
-    ProdDTO getByOrderNo(String pNo);
+    ProdDTO getProdByOrderNo(String oId);
 
-    List<ProdDTO> getAllProds();
+    List<ProdDTO> getAllProds(String uId);
 
-    boolean removeByOrderNo(String pNo);
+    boolean removeProdByOrderNo(String oId);
 
-    boolean removeProds();
+    boolean removeProds(String uId);
 
 }

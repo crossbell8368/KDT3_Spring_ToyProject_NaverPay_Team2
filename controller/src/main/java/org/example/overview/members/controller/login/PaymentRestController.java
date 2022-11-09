@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/shopping")
 public class PaymentRestController {
@@ -32,7 +31,7 @@ public class PaymentRestController {
     public ResponseEntity<String> getPaymentByoId(@RequestParam String oId){
         String result = "";
         PaymentDTO paymentDTO = paymentService.getPaymentById(oId);
-        ProdDTO prodDTO = prodService.getByOrderNo(oId);
+        ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
         result = prodDTO.toString() + paymentDTO.toString();
         System.out.println(result);
         return new ResponseEntity(result, HttpStatus.OK);
@@ -43,7 +42,9 @@ public class PaymentRestController {
                                                      @RequestParam(required = false) String agree){
         if(agree == null || !agree.equals("yes"))   return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 
-        Status status = paymentService.deletePaymentById(oId) ? Status.SUCCESS : Status.FAIL;
+        Status pay_status = paymentService.deletePaymentById(oId) ? Status.SUCCESS : Status.FAIL;
+        Status prod_status = prodService.removeProdByOrderNo(oId) ? Status.SUCCESS : Status.FAIL;
+        Status status = pay_status.equals(Status.SUCCESS) && prod_status.equals(Status.SUCCESS) ? Status.SUCCESS : Status.FAIL;
 
         return new ResponseEntity<>(status,HttpStatus.OK);
 

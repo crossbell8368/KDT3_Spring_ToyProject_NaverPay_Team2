@@ -1,4 +1,4 @@
-package org.example.overview.members.DAO;
+package org.example.overview.members.dao;
 
 import org.example.overview.members.entity.Payment;
 
