@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/payhome")
+@RequestMapping("/payhome") // TODO: URL 수정
 public class PayhomeController { // 유저 검색 페이지 컨트롤러
 
     private String uId;
@@ -31,6 +31,7 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
 
     @GetMapping("/payhome")
     public String searchPage(Model model, HttpSession session) {
+        System.out.println("searchPage() 메서드 실행");
         // 로그인 후 등장하는 페이지 컨트롤러
         // 로그인ID에 해당되는 모든 결제상품 출력
         String view = "members/login/search";
@@ -55,6 +56,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
     @PostMapping("/payhome")
     @ResponseBody
     public String listUpByDate(@RequestParam String start, @RequestParam String end, HttpSession session){
+        System.out.println("listUpByDate() 메서드 실행");
+
         if (session.getAttribute("SESSION_ID") == null) {
             return "redirect:/";
         }
@@ -70,9 +73,9 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
             return parseListToJSONArrayString(prodDTOList);
         }
         return "";
-
     }
 
+    // TODO: Service 로 이전?
     public String getAllProd(String uId){
         List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
         if (prodDTOList != null) {
@@ -82,6 +85,7 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         return "";
     }
 
+    // TODO: Service 로 이전
     public String parseListToJSONArrayString(List<ProdDTO> prodDTOList) {
         JSONArray jsonArray = new JSONArray(); // List<Map<>>
         for (int i = 0; i < prodDTOList.size(); i++) {
