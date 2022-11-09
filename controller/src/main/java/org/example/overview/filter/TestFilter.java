@@ -18,7 +18,7 @@ public class TestFilter implements Filter {
         // 1. 전처리 작업
         HttpServletRequest req = (HttpServletRequest) request;
         String method = req.getMethod();
-        System.out.print(method + "[" + req.getRequestURI()+"]\t");
+        System.out.print("[" + method + "] [URL : " + req.getRequestURI()+ "]\t");
 
         // 2. 서블릿 또는 다음 필터를 호출
         chain.doFilter(request, response);
