@@ -103,7 +103,7 @@ public class ProdDAO implements IProdDAO {
     }
 
     @Override
-    public List<Prod> selectDate(String start, String end) {
+    public List<Prod> selectDate(String uId, String start, String end) {
         // 날짜로 검색한 데이터결과
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
@@ -116,19 +116,21 @@ public class ProdDAO implements IProdDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                prodList.add(new Prod(
-                        rs.getString("USER_ID"),
-                        rs.getString("ORDER_NO"),
-                        rs.getString("ORDER_DATE"),
-                        rs.getString("PROD_MANUF"),
-                        rs.getString("PROD_INFO"),
-                        rs.getString("PROD_COST"),
-                        rs.getString("PROD_CNT"),
-                        rs.getString("PROD_SELLER"),
-                        rs.getString("PROD_SELLNUM"),
-                        rs.getString("PROD_STATUS"),
-                        rs.getString("PROD_REVIEW")
-                ));
+                if(rs.getString("USER_ID").equals(uId)){
+                    prodList.add(new Prod(
+                            rs.getString("USER_ID"),
+                            rs.getString("ORDER_NO"),
+                            rs.getString("ORDER_DATE"),
+                            rs.getString("PROD_MANUF"),
+                            rs.getString("PROD_INFO"),
+                            rs.getString("PROD_COST"),
+                            rs.getString("PROD_CNT"),
+                            rs.getString("PROD_SELLER"),
+                            rs.getString("PROD_SELLNUM"),
+                            rs.getString("PROD_STATUS"),
+                            rs.getString("PROD_REVIEW")
+                    ));
+                }
             }
 
         } catch (SQLException e) {
@@ -138,7 +140,7 @@ public class ProdDAO implements IProdDAO {
         }
         return prodList;
     }
-    public List<Prod> selectAll() {
+    public List<Prod> selectAll(String uId) {
         List<Prod> prodList = new LinkedList<>();
         try {
             conn = JDBCMgr.getConnection();
@@ -146,19 +148,21 @@ public class ProdDAO implements IProdDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                prodList.add(new Prod(
-                        rs.getString("USER_ID"),
-                        rs.getString("ORDER_NO"),
-                        rs.getString("ORDER_DATE"),
-                        rs.getString("PROD_MANUF"),
-                        rs.getString("PROD_INFO"),
-                        rs.getString("PROD_COST"),
-                        rs.getString("PROD_CNT"),
-                        rs.getString("PROD_SELLER"),
-                        rs.getString("PROD_SELLNUM"),
-                        rs.getString("PROD_STATUS"),
-                        rs.getString("PROD_REVIEW")
-                ));
+                if(rs.getString("USER_ID") == uId){
+                    prodList.add(new Prod(
+                            rs.getString("USER_ID"),
+                            rs.getString("ORDER_NO"),
+                            rs.getString("ORDER_DATE"),
+                            rs.getString("PROD_MANUF"),
+                            rs.getString("PROD_INFO"),
+                            rs.getString("PROD_COST"),
+                            rs.getString("PROD_CNT"),
+                            rs.getString("PROD_SELLER"),
+                            rs.getString("PROD_SELLNUM"),
+                            rs.getString("PROD_STATUS"),
+                            rs.getString("PROD_REVIEW")
+                    ));
+                }
             }
 
         } catch (SQLException e) {
@@ -223,6 +227,5 @@ public class ProdDAO implements IProdDAO {
         }
         return res;
     }
-
 }
 

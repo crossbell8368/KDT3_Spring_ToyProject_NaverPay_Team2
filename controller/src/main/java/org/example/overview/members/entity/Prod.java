@@ -1,5 +1,7 @@
 package org.example.overview.members.entity;
 
+import org.example.overview.members.dto.ProdDTO;
+
 public class Prod {
     /*
     Id / 주문번호 / 주문일 / 제조사 / 상품내역 / 상품금액 / 상품수량 / 판매자이름 / 판매자 전화번호 / 결제상태 / 주문내역
@@ -51,6 +53,22 @@ public class Prod {
 
     public String getOrderNo() {
         return String.valueOf(orderNo);
+    }
+
+    public ProdDTO toDTO() {
+        return new ProdDTO(
+                uId,
+                orderNo,
+                orderDate,
+                manufacture,
+                productInfo,
+                cost,
+                productCount,
+                seller,
+                sellNum,
+                status,
+                review
+        );
     }
 
     public String getOrderDate() {

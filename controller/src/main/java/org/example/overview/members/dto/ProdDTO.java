@@ -14,7 +14,20 @@ public class ProdDTO {
     private int review;
 
     public ProdDTO(){
+    }
 
+    public ProdDTO(String uId, int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
+        this.uId = uId;
+        this.orderNo = orderNo;
+        this.orderDate = orderDate;
+        this.manufacture = manufacture;
+        this.productInfo = productInfo;
+        this.cost = cost;
+        this.productCount = productCount;
+        this.seller = seller;
+        this.sellNum = sellNum;
+        this.status = status;
+        this.review = review;
     }
 
     public ProdDTO(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
@@ -40,8 +53,8 @@ public class ProdDTO {
         this.uId = uId;
     }
 
-    public int getOrderNo() {
-        return orderNo;
+    public String getOrderNo() {
+        return String.valueOf(orderNo);
     }
 
     public void setOrderNo(int orderNo) {
@@ -80,8 +93,8 @@ public class ProdDTO {
         this.cost = cost;
     }
 
-    public int getProductCount() {
-        return productCount;
+    public String getProductCount() {
+        return String.valueOf(productCount);
     }
 
     public void setProductCount(int productCount) {
@@ -104,16 +117,16 @@ public class ProdDTO {
         this.sellNum = sellNum;
     }
 
-    public int getStatus() {
-        return status;
+    public String getStatus() {
+        return String.valueOf(status);
     }
 
     public void setStatus(int status) {
         this.status = status;
     }
 
-    public int getReview() {
-        return review;
+    public String getReview() {
+        return String.valueOf(review);
     }
 
     public void setReview(int review) {
