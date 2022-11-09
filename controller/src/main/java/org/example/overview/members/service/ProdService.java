@@ -20,43 +20,45 @@ public class ProdService implements IProdService {
     }
 
     @Override
-    public List<ProdDTO> listByDate(String uid, String start, String end) {
-        if (start == null || end == null) return null;
+    public List<ProdDTO> getProdlistByDate(String uId, String start, String end) {
+        if (start == null || end == null || uId == null) return null;
 
-        List<Prod> prodList = prodDAO.selectDate(uid, start, end);
+        List<Prod> prodList = prodDAO.selectDate(uId, start, end);
         return prodList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
 
 
     @Override
-    public ProdDTO getByOrderNo(String pNo) {
-        if (pNo == null) return null;
+    public ProdDTO getProdByOrderNo(String oId) {
+        if (oId == null) return null;
 
-        Prod prod = prodDAO.select(pNo);
+        Prod prod = prodDAO.select(oId);
         return prod.toDTO();
     }
 
     @Override
-    public List<ProdDTO> getAllProds() {
-        List<Prod> prodList = prodDAO.selectAll();
+    public List<ProdDTO> getAllProds(String uId) {
+        if (uId == null) return null;
+
+        List<Prod> prodList = prodDAO.selectAll(uId);
         return prodList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
 
 
     @Override
-    public boolean removeByOrderNo(String pNo) {
-        if (pNo == null) return false;
+    public boolean removeProdByOrderNo(String oId) {
+        if (oId == null) return false;
 
-        Prod prod = prodDAO.select(pNo);
+        Prod prod = prodDAO.select(oId);
         if (prod == null) return false;
 
-        int res = prodDAO.delete(pNo);
+        int res = prodDAO.delete(oId);
         return res > 0;
     }
 
     @Override
-    public boolean removeProds() {
-        int res = prodDAO.deleteAll();
+    public boolean removeProds(String uId) {
+        int res = prodDAO.deleteAll(uId);
         return res > 0;
     }
 }

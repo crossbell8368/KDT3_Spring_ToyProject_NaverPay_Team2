@@ -31,33 +31,40 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
 
     @GetMapping("/payhome")
     public String searchPage(Model model, HttpSession session) {
-
+        // 로그인 후 등장하는 페이지 컨트롤러
+        // 로그인ID에 해당되는 모든 결제상품 출력
         String view = "members/login/search";
 
         if (session.getAttribute("SESSION_ID") == null) {
             return "redirect:/";
         }
+        uId = sessionMgr.get(session);
 
         if (session.getAttribute("SESSION_ID") != null) {
             model.addAttribute("uId", sessionMgr.get(session));
         }
 
+        List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
+
+        if (prodDTOList != null) {
+            return parseListToJSONArrayString(prodDTOList);
+        }
         return view;
     }
 
     @PostMapping("/payhome")
     @ResponseBody
-    public String listUpByDate(@RequestParam String start, @RequestParam String end, HttpSession sess){
-        if (sess.getAttribute("SESSION_ID") == null) {
+    public String listUpByDate(@RequestParam String start, @RequestParam String end, HttpSession session){
+        if (session.getAttribute("SESSION_ID") == null) {
             return "redirect:/";
         }
+        uId = sessionMgr.get(session);
 
         if ((start == null || start.equals("")) || (end == null || end.equals(""))){
-            return getAllProd(sess);
+            return getAllProd(uId);
         }
 
-        uId = sessionMgr.get(sess);
-        List<ProdDTO> prodDTOList = prodService.listByDate(uId, start, end);
+        List<ProdDTO> prodDTOList = prodService.getProdlistByDate(uId, start, end);
 
         if (prodDTOList != null) {
             return parseListToJSONArrayString(prodDTOList);
@@ -66,8 +73,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
 
     }
 
-    public String getAllProd(HttpSession sess){
-        List<ProdDTO> prodDTOList = prodService.getAllProds();
+    public String getAllProd(String uId){
+        List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
         if (prodDTOList != null) {
             return parseListToJSONArrayString(prodDTOList);
         }

@@ -1,7 +1,7 @@
-package org.example.overview.members.DTO;
+package org.example.overview.members.dto;
 
-import org.example.NPay.overview.entity.Payment;
-import org.example.NPay.overview.vo.PaymentVO;
+import org.example.overview.members.entity.Payment;
+import org.example.overview.members.vo.PaymentVO;
 
 public class PaymentDTO {
     String oId = "";
