@@ -40,6 +40,7 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
             return "redirect:/";
         }
         uId = sessionMgr.get(session);
+        System.out.println(uId + "님의 쇼핑 리스트 출력 결과");
 
         if (session.getAttribute("SESSION_ID") != null) {
             model.addAttribute("uId", sessionMgr.get(session));
@@ -59,15 +60,18 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         if (session.getAttribute("SESSION_ID") == null) {
             return "redirect:/";
         }
-        uId = sessionMgr.get(session);
 
+        uId = sessionMgr.get(session);
+        System.out.println(uId + "님의 쇼핑 리스트 출력 결과");
         if ((start == null || start.equals("")) || (end == null || end.equals(""))){
+            System.out.println("잘못된 기간입니다. 기존 리스트를 출력합니다.");
             List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
             printProd(prodDTOList);
+        } else {
+            System.out.println(start + " ~ " + end + " 사이의 쇼핑 리스트를 출력합니다.");
+            List<ProdDTO> prodDTOList = prodService.getProdlistByDate(uId, start, end);
+            printProd(prodDTOList);
         }
-
-        List<ProdDTO> prodDTOList = prodService.getProdlistByDate(uId, start, end);
-        printProd(prodDTOList);
 
         return "";
     }
@@ -75,7 +79,7 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
     public void printProd(List<ProdDTO> prodDTOList) {
         if (prodDTOList != null) {
             for (int i = 0; i < prodDTOList.size(); i++) {
-                System.out.println(prodDTOList.get(i));
+                System.out.println(prodDTOList.get(i).toVO());
             }
         }
     }
