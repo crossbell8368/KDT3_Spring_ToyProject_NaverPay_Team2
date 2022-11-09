@@ -22,8 +22,8 @@ public class ProdDAO implements IProdDAO {
     private ResultSet rs = null;
 
     // SQL =====================================================
-    private static final String PROD_SELECT_ALL = "select * from PROD where USER_ID like ?";
-    private static final String PROD_SELECT = "select * from PROD where ORDER_NO = ?";
+    private static final String PROD_SELECT_ALL = "select * from PROD where uId = ?";
+    private static final String PROD_SELECT = "select * from PROD where oId = ?";
     private static final String PROD_SEARCH_DATE = "select * from PROD where ORDER_DATE between cast(? as DATE) and cast(? as DATE)";
     private static final String PROD_INSERT = "insert into PROD values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String PROD_DELETE = "delete PROD where ORDER_NO = ?";
@@ -31,20 +31,21 @@ public class ProdDAO implements IProdDAO {
 
     // Method =====================================================
     @Override
-    public List<Prod> selectAll(String uid) {
+    public List<Prod> selectAll(String uId) {
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
+        int cnt = 0;
 
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_SELECT_ALL);
-            stmt.setString(1, "%" + uid + "%");
+            stmt.setString(1, uId);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
                 prodList.add(new Prod(
-                        rs.getString("USER_ID"),
-                        rs.getString("ORDER_NO"),
+                        rs.getString("uId"),
+                        rs.getString("oId"),
                         rs.getString("ORDER_DATE"),
                         rs.getString("PROD_MANUF"),
                         rs.getString("PROD_INFO"),
@@ -55,6 +56,8 @@ public class ProdDAO implements IProdDAO {
                         rs.getString("PROD_STATUS"),
                         rs.getString("PROD_REVIEW")
                 ));
+                System.out.println(prodList.get(cnt).toString());
+                cnt++;
             }
 
         } catch (SQLException e) {
@@ -80,8 +83,8 @@ public class ProdDAO implements IProdDAO {
 
             if (rs.next()) {
                 prod = new Prod(
-                        rs.getString("USER_ID"),
-                        rs.getString("ORDER_NO"),
+                        rs.getString("uId"),
+                        rs.getString("oId"),
                         rs.getString("ORDER_DATE"),
                         rs.getString("PROD_MANUF"),
                         rs.getString("PROD_INFO"),
@@ -92,6 +95,7 @@ public class ProdDAO implements IProdDAO {
                         rs.getString("PROD_STATUS"),
                         rs.getString("PROD_REVIEW")
                 );
+                System.out.println(prod.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,6 +110,7 @@ public class ProdDAO implements IProdDAO {
         // 날짜로 검색한 데이터결과
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
+        int cnt = 0;
 
         try {
             conn = JDBCMgr.getConnection();
@@ -115,10 +120,10 @@ public class ProdDAO implements IProdDAO {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                if(rs.getString("USER_ID").equals(uId)){
+                if(rs.getString("uId").equals(uId)){
                     prodList.add(new Prod(
-                            rs.getString("USER_ID"),
-                            rs.getString("ORDER_NO"),
+                            rs.getString("uId"),
+                            rs.getString("oId"),
                             rs.getString("ORDER_DATE"),
                             rs.getString("PROD_MANUF"),
                             rs.getString("PROD_INFO"),
@@ -129,6 +134,8 @@ public class ProdDAO implements IProdDAO {
                             rs.getString("PROD_STATUS"),
                             rs.getString("PROD_REVIEW")
                     ));
+                    System.out.println(prodList.get(cnt).toString());
+                    cnt++;
                 }
             }
 

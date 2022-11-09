@@ -41,6 +41,7 @@ public class ProdService implements IProdService {
         if (uId == null) return null;
 
         List<Prod> prodList = prodDAO.selectAll(uId);
+
         return prodList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
 

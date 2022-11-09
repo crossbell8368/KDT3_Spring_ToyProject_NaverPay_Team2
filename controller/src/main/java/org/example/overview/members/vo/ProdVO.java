@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class ProdVO {
     private String uId="";
-    private int orderNo;
-    private String orderDate;
+    private String oId="";
+    private String orderDate="";
     private String manufacture="";
     private String productInfo="";
     private String cost="";
@@ -18,9 +18,9 @@ public class ProdVO {
     public ProdVO() {
     }
 
-    public ProdVO(String uId, int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
+    public ProdVO(String uId, String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
         this.uId = uId;
-        this.orderNo = orderNo;
+        this.oId = oId;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
         this.productInfo = productInfo;
@@ -32,8 +32,8 @@ public class ProdVO {
         this.review = review;
     }
 
-    public ProdVO(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
-        this.orderNo = orderNo;
+    public ProdVO(String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+        this.oId = oId;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
         this.productInfo=productInfo;
@@ -48,8 +48,8 @@ public class ProdVO {
         return uId;
     }
 
-    public int getOrderNo() {
-        return orderNo;
+    public String getOrderNo() {
+        return oId;
     }
 
     public String getOrderDate() {
@@ -93,7 +93,7 @@ public class ProdVO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProdVO shoppingVO = (ProdVO) o;
-        return orderNo == shoppingVO.orderNo && productCount == shoppingVO.productCount
+        return oId == shoppingVO.oId && productCount == shoppingVO.productCount
                 && status == shoppingVO.status && review == shoppingVO.review && uId.equals(shoppingVO.uId)
                 && orderDate.equals(shoppingVO.orderDate) && manufacture.equals(shoppingVO.manufacture)
                 && productInfo.equals(shoppingVO.productInfo) && cost.equals(shoppingVO.cost)
@@ -102,7 +102,7 @@ public class ProdVO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(uId, orderNo, orderDate, manufacture, productInfo, cost, productCount, seller, sellNum, status, review);
+        return Objects.hash(uId, oId, orderDate, manufacture, productInfo, cost, productCount, seller, sellNum, status, review);
     }
 
 
@@ -110,7 +110,7 @@ public class ProdVO {
     public String toString() {
         return "ProdVO{" +
                 "uId='" + uId + '\'' +
-                ", orderNo=" + orderNo +
+                ", oId=" + oId +
                 ", orderDate='" + orderDate + '\'' +
                 ", manufacture='" + manufacture + '\'' +
                 ", productInfo='" + productInfo + '\'' +

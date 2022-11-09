@@ -90,8 +90,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         JSONArray jsonArray = new JSONArray(); // List<Map<>>
         for (int i = 0; i < prodDTOList.size(); i++) {
             Map<String, String> map = new HashMap<>();
-            map.put("USER_ID", prodDTOList.get(i).getuId());
-            map.put("ORDER_NO", prodDTOList.get(i).getOrderNo());
+            map.put("uId", prodDTOList.get(i).getuId());
+            map.put("oId", prodDTOList.get(i).getOrderNo());
             map.put("ORDER_DATE", prodDTOList.get(i).getOrderDate());
             map.put("PROD_MANUF", prodDTOList.get(i).getManufacture());
             map.put("PROD_INFO", prodDTOList.get(i).getProductInfo());
@@ -110,8 +110,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
 
     public String parseObjectToJSONObjectString(ProdDTO prodDTO) {
         Map<String, String> map = new HashMap<>();
-        map.put("USER_ID", prodDTO.getuId());
-        map.put("ORDER_NO", prodDTO.getOrderNo());
+        map.put("uId", prodDTO.getuId());
+        map.put("oId", prodDTO.getOrderNo());
         map.put("ORDER_DATE", prodDTO.getOrderDate());
         map.put("PROD_MANUF", prodDTO.getManufacture());
         map.put("PROD_INFO", prodDTO.getProductInfo());

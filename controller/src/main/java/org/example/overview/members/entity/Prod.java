@@ -7,7 +7,7 @@ public class Prod {
     Id / 주문번호 / 주문일 / 제조사 / 상품내역 / 상품금액 / 상품수량 / 판매자이름 / 판매자 전화번호 / 결제상태 / 주문내역
      */
     private String uId="";
-    private int orderNo;
+    private String oId;
     private String orderDate;
     private String manufacture="";
     private String productInfo="";
@@ -21,9 +21,9 @@ public class Prod {
     public Prod() {
     }
 
-    public Prod(String uId, String orderNo, String orderDate, String manufacture, String productInfo, String cost, String productCount, String seller, String sellNum, String status, String review) {
+    public Prod(String uId, String oId, String orderDate, String manufacture, String productInfo, String cost, String productCount, String seller, String sellNum, String status, String review) {
         this.uId = uId;
-        this.orderNo = Integer.parseInt(orderNo);
+        this.oId = oId;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
         this.productInfo = productInfo;
@@ -35,8 +35,8 @@ public class Prod {
         this.review = Integer.parseInt(review);
     }
 
-    public Prod(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
-        this.orderNo = orderNo;
+    public Prod(String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+        this.oId = oId;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
         this.productInfo=productInfo;
@@ -52,13 +52,13 @@ public class Prod {
     }
 
     public String getOrderNo() {
-        return String.valueOf(orderNo);
+        return oId;
     }
 
     public ProdDTO toDTO() {
         return new ProdDTO(
                 uId,
-                orderNo,
+                oId,
                 orderDate,
                 manufacture,
                 productInfo,
@@ -111,7 +111,7 @@ public class Prod {
     public String toString() {
         return "Prod{" +
                 "uId='" + uId + '\'' +
-                ", orderNo=" + orderNo +
+                ", oId=" + oId +
                 ", orderDate='" + orderDate + '\'' +
                 ", manufacture='" + manufacture + '\'' +
                 ", productInfo='" + productInfo + '\'' +

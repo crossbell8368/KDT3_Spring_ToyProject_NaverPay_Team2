@@ -4,8 +4,8 @@ import org.example.overview.members.vo.ProdVO;
 
 public class ProdDTO {
     private String uId="";
-    private int orderNo;
-    private String orderDate;
+    private String oId="";
+    private String orderDate="";
     private String manufacture="";
     private String productInfo="";
     private String cost="";
@@ -18,9 +18,9 @@ public class ProdDTO {
     public ProdDTO(){
     }
 
-    public ProdDTO(String uId, int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
+    public ProdDTO(String uId, String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
         this.uId = uId;
-        this.orderNo = orderNo;
+        this.oId = oId;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
         this.productInfo = productInfo;
@@ -32,8 +32,8 @@ public class ProdDTO {
         this.review = review;
     }
 
-    public ProdDTO(int orderNo, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
-        this.orderNo = orderNo;
+    public ProdDTO(String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+        this.oId = oId;
         this.orderDate = orderDate;
         this.manufacture = manufacture;
         this.productInfo=productInfo;
@@ -45,7 +45,7 @@ public class ProdDTO {
     }
 
     //public Prod toEntity(){return new Shopping(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
-    public ProdVO toVO(){return new ProdVO(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
+    public ProdVO toVO(){return new ProdVO(oId, orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
 
     public String getuId() {
         return uId;
@@ -56,11 +56,11 @@ public class ProdDTO {
     }
 
     public String getOrderNo() {
-        return String.valueOf(orderNo);
+        return oId;
     }
 
-    public void setOrderNo(int orderNo) {
-        this.orderNo = orderNo;
+    public void setOrderNo(String oId) {
+        this.oId = oId;
     }
 
     public String getOrderDate() {
@@ -139,7 +139,7 @@ public class ProdDTO {
     public String toString() {
         return "ProdDTO{" +
                 "uId='" + uId + '\'' +
-                ", orderNo=" + orderNo +
+                ", oId=" + oId +
                 ", orderDate='" + orderDate + '\'' +
                 ", manufacture='" + manufacture + '\'' +
                 ", productInfo='" + productInfo + '\'' +
