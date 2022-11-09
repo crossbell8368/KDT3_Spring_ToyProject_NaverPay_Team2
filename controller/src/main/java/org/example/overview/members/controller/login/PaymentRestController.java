@@ -29,11 +29,12 @@ public class PaymentRestController {
     public ResponseEntity<DetailVO> getPaymentByoId(@RequestParam String oId){
         PaymentDTO paymentDTO = paymentService.getPaymentById(oId);
 
-        ProdDTO prodDTO = prodService.getByOrderNo(oId);
+        ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
 
         DetailVO detailVO = new DetailVO(prodDTO.toVO(), paymentDTO.toVO());
 
         return new ResponseEntity(detailVO, HttpStatus.OK);
+    }
 
 
     @DeleteMapping("/payment")
@@ -42,7 +43,7 @@ public class PaymentRestController {
         if(agree == null || !agree.equals("yes"))   return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
 
 
-        Status status = (paymentService.deletePaymentById(oId) && prodService.removeByOrderNo(oId)) ? Status.SUCCESS : Status.FAIL;
+        Status status = (paymentService.deletePaymentById(oId) && prodService.removeProdByOrderNo(oId)) ? Status.SUCCESS : Status.FAIL;
 
         return new ResponseEntity<>(status,HttpStatus.OK);
     }

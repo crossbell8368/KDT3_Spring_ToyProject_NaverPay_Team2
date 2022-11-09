@@ -1,5 +1,7 @@
 package org.example.overview.members.dto;
 
+import org.example.overview.members.vo.ProdVO;
+
 public class ProdDTO {
     private String uId="";
     private int orderNo;
@@ -42,8 +44,8 @@ public class ProdDTO {
         this.status = status;
     }
 
-    //public Shopping toEntity(){return new Shopping(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
-    //public ShoppingVO toVO(){return new ShoppingVO(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
+    //public Prod toEntity(){return new Shopping(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
+    public ProdVO toVO(){return new ProdVO(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
 
     public String getuId() {
         return uId;
