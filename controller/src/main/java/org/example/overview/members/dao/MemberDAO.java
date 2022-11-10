@@ -18,9 +18,9 @@ public class MemberDAO implements IMemberDAO {
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
 
-    private static final String MEMBER_SELECT = "select * from member where uId = ?";
-    private static final String MEMBER_SELECT_ALL = "select * from member";
-    private static final String MEMBER_INSERT = "insert into member values(?, ?, ?, ?)";
+    private static final String MEMBER_SELECT = "select * from MEMBER where uId = ?";
+    private static final String MEMBER_SELECT_ALL = "select * from MEMBER";
+    private static final String MEMBER_INSERT = "insert into MEMBER values(?, ?, ?, ?)";
 
     @Override
     public Member select(String inputId) {

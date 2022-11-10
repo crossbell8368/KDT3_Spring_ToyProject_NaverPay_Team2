@@ -20,12 +20,12 @@ public class ProdDAO implements IProdDAO {
     private ResultSet rs = null;
 
     // SQL =====================================================
-    private static final String PROD_SELECT_ALL = "select * from Prod where uId = ?";
-    private static final String PROD_SELECT = "select * from Prod where oId = ?";
-    private static final String PROD_SEARCH_DATE = "select * from Prod where orderDate between cast(? as DATE) and cast(? as DATE)";
-    private static final String PROD_INSERT = "insert into Prod values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String PROD_DELETE = "delete Prod where oId = ?";
-    private static final String PROD_DELETE_ALL = "delete Prod where uId = ?";
+    private static final String PROD_SELECT_ALL = "select * from PRODUCT where uId = ?";
+    private static final String PROD_SELECT = "select * from PRODUCT where oId = ?";
+    private static final String PROD_SEARCH_DATE = "select * from PRODUCT where orderDate between cast(? as DATE) and cast(? as DATE)";
+    private static final String PROD_INSERT = "insert into PRODUCT values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String PROD_DELETE = "delete PRODUCT where oId = ?";
+    private static final String PROD_DELETE_ALL = "delete PRODUCT where uId = ?";
 
     // Method =====================================================
     @Override
