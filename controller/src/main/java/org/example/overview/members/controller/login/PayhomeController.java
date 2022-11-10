@@ -37,7 +37,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         String view = "members/login/payhome";
 
         if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
+            System.out.println("제한된 페이지입니다. 로그인을 수행해주세요");
+            return "redirect:/login";
         }
         uId = sessionMgr.get(session);
         System.out.println(uId + "님의 쇼핑 리스트 출력 결과");
@@ -58,7 +59,8 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         System.out.println("listUpByDate() 메서드 실행");
 
         if (session.getAttribute("SESSION_ID") == null) {
-            return "redirect:/";
+            System.out.println("제한된 페이지입니다. 로그인을 수행해주세요");
+            return "redirect:/login";
         }
 
         uId = sessionMgr.get(session);
@@ -70,6 +72,10 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
         } else {
             System.out.println(start + " ~ " + end + " 사이의 쇼핑 리스트를 출력합니다.");
             List<ProdDTO> prodDTOList = prodService.getProdlistByDate(uId, start, end);
+            if (prodDTOList.isEmpty()) {
+                System.out.println("해당하는 기간에 쇼핑 정보가 없습니다.");
+            }
+
             printProd(prodDTOList);
         }
 
