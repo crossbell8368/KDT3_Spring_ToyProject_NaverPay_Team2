@@ -1,8 +1,8 @@
 package org.example.overview.members.vo;
 
 public class DetailVO {
-    ProdVO prodVO = new ProdVO();
-    PaymentVO paymentVO = new PaymentVO();
+    ProdVO prodVO;
+    PaymentVO paymentVO;
 
     public DetailVO(ProdVO prodVO, PaymentVO paymentVO) {
         this.prodVO = prodVO;

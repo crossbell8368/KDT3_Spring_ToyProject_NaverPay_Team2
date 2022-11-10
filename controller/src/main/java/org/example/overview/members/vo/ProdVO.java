@@ -3,122 +3,91 @@ package org.example.overview.members.vo;
 import java.util.Objects;
 
 public class ProdVO {
-    private String uId="";
     private String oId="";
+    private String uId="";
     private String orderDate="";
-    private String manufacture="";
-    private String productInfo="";
-    private String cost="";
-    private int productCount;
-    private String seller="";
-    private String sellNum="";
-    private int status;
-    private int review;
+    private String productName="";
+    private String amount="";
+    private String status="";
+    private String company;
+    private String companyTel="";
 
-    public ProdVO() {
-    }
-
-    public ProdVO(String uId, String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
+    public ProdVO(String oId, String uId, String orderDate, String productName, String amount, String status, String company, String companyTel) {
+        this.oId = oId;
         this.uId = uId;
-        this.oId = oId;
         this.orderDate = orderDate;
-        this.manufacture = manufacture;
-        this.productInfo = productInfo;
-        this.cost = cost;
-        this.productCount = productCount;
-        this.seller = seller;
-        this.sellNum = sellNum;
+        this.productName = productName;
+        this.amount = amount;
         this.status = status;
-        this.review = review;
+        this.company = company;
+        this.companyTel = companyTel;
     }
 
-    public ProdVO(String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+    public ProdVO(String oId, String orderDate, String productName, String amount, String status, String company, String companyTel) {
         this.oId = oId;
         this.orderDate = orderDate;
-        this.manufacture = manufacture;
-        this.productInfo=productInfo;
-        this.cost = cost;
-        this.productCount = productCount;
-        this.seller = seller;
-        this.sellNum = sellNum;
+        this.productName = productName;
+        this.amount = amount;
         this.status = status;
+        this.company = company;
+        this.companyTel = companyTel;
+    }
+
+    public String getoId() {
+        return oId;
     }
 
     public String getuId() {
         return uId;
     }
 
-    public String getOrderNo() {
-        return oId;
-    }
-
     public String getOrderDate() {
         return orderDate;
     }
 
-    public String getManufacture() {
-        return manufacture;
+    public String getProductName() {
+        return productName;
     }
 
-    public String getProductInfo() {
-        return productInfo;
+    public String getAmount() {
+        return amount;
     }
 
-    public String getCost() {
-        return cost;
-    }
-
-    public int getProductCount() {
-        return productCount;
-    }
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public String getSellNum() {
-        return sellNum;
-    }
-
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public int getReview() {
-        return review;
+    public String getCompany() {
+        return company;
+    }
+
+    public String getCompanyTel() {
+        return companyTel;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProdVO shoppingVO = (ProdVO) o;
-        return oId == shoppingVO.oId && productCount == shoppingVO.productCount
-                && status == shoppingVO.status && review == shoppingVO.review && uId.equals(shoppingVO.uId)
-                && orderDate.equals(shoppingVO.orderDate) && manufacture.equals(shoppingVO.manufacture)
-                && productInfo.equals(shoppingVO.productInfo) && cost.equals(shoppingVO.cost)
-                && seller.equals(shoppingVO.seller) && sellNum.equals(shoppingVO.sellNum);
+        ProdVO prodVO = (ProdVO) o;
+        return Objects.equals(oId, prodVO.oId) && Objects.equals(uId, prodVO.uId) && Objects.equals(orderDate, prodVO.orderDate) && Objects.equals(productName, prodVO.productName) && Objects.equals(amount, prodVO.amount) && Objects.equals(status, prodVO.status) && Objects.equals(company, prodVO.company) && Objects.equals(companyTel, prodVO.companyTel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uId, oId, orderDate, manufacture, productInfo, cost, productCount, seller, sellNum, status, review);
+        return Objects.hash(oId, uId, orderDate, productName, amount, status, company, companyTel);
     }
-
 
     @Override
     public String toString() {
         return "ProdVO{" +
-                "oId=" + oId +
+                "oId='" + oId + '\'' +
                 ", orderDate='" + orderDate + '\'' +
-                ", manufacture='" + manufacture + '\'' +
-                ", productInfo='" + productInfo + '\'' +
-                ", cost='" + cost + '\'' +
-                ", productCount=" + productCount +
-                ", seller='" + seller + '\'' +
-                ", sellNum='" + sellNum + '\'' +
-                ", status=" + status +
-                ", review=" + review +
+                ", productName='" + productName + '\'' +
+                ", amount='" + amount + '\'' +
+                ", status='" + status + '\'' +
+                ", company='" + company + '\'' +
+                ", companyTel='" + companyTel + '\'' +
                 '}';
     }
 }
