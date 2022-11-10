@@ -33,12 +33,12 @@ public class PaymentDAO implements IPaymentDAO{
 
             if(rs.next()){
                 String oId = rs.getString("oId");
-                String type = rs.getString("type");
-                String time = rs.getString("time");
+                String orderType = rs.getString("orderType");
+                String orderDate = rs.getString("orderDate");
                 String amount = rs.getString("amount");
                 String get_npoint = rs.getString("get_npoint");
                 String use_npoint = rs.getString("use_npoint");
-                payment = new Payment(oId, type,time, amount, get_npoint, use_npoint);
+                payment = new Payment(oId, orderType,orderDate, amount, get_npoint, use_npoint);
             }
             conn.commit();
         }catch (SQLException e){
@@ -74,6 +74,5 @@ public class PaymentDAO implements IPaymentDAO{
     public static void main(String[] args) {
         PaymentDAO a = new PaymentDAO();
         System.out.println(a.select("1"));
-
     }
 }
