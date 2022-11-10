@@ -19,9 +19,6 @@ public class DetailVO {
 
     @Override
     public String toString() {
-        return "DetailVO{" +
-                "prodVO=" + prodVO +
-                ", paymentVO=" + paymentVO +
-                '}';
+        return prodVO + "\n" + paymentVO;
     }
 }
