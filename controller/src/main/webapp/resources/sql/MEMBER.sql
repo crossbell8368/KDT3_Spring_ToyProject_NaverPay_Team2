@@ -16,3 +16,5 @@ Insert into MEMBER values ('hamings','hamings1234','hamings@gmail.com','010-0000
 Insert into MEMBER values ('Blooossom','Blooossom1234','Blooossom@gmail.com','010-0000-0000');
 
 SELECT * FROM MEMBER;
+
+DELETE FROM MEMBER;

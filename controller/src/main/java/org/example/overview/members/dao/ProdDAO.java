@@ -87,7 +87,7 @@ public class ProdDAO implements IProdDAO {
                         rs.getString("company"),
                         rs.getString("companyTel")
                 );
-                System.out.println(prod.toString());
+                // System.out.println(prod.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class ProdDAO implements IProdDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("잘못된 기간 입니다.");
         } finally {
             JDBCMgr.close(rs, stmt, conn);
         }
