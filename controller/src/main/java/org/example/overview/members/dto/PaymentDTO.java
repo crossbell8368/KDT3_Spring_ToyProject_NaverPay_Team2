@@ -5,8 +5,8 @@ import org.example.overview.members.vo.PaymentVO;
 
 public class PaymentDTO {
     String oId = "";
-    String type = "";
-    String time = "";
+    String orderType = "";
+    String orderDate = "";
     String amount = "";
     String get_npoint = "";
     String use_npoint = "";
@@ -15,21 +15,21 @@ public class PaymentDTO {
 
     }
 
-    public PaymentDTO(String oId, String type, String time, String amount, String get_npoint, String use_npoint) {
+    public PaymentDTO(String oId, String orderType, String orderDate, String amount, String get_npoint, String use_npoint) {
         this.oId = oId;
-        this.type = type;
-        this.time = time;
+        this.orderType = orderType;
+        this.orderDate = orderDate;
         this.amount = amount;
         this.get_npoint = get_npoint;
         this.use_npoint = use_npoint;
     }
 
     public PaymentVO toVO(){
-        return new PaymentVO(oId, type, time, amount, get_npoint, use_npoint);
+        return new PaymentVO(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 
     public Payment toEntity(){
-        return new Payment(oId, type, time, amount, get_npoint, use_npoint);
+        return new Payment(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 
     public String getoId() {
@@ -40,20 +40,20 @@ public class PaymentDTO {
         this.oId = oId;
     }
 
-    public String getType() {
-        return type;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
-    public String getTime() {
-        return time;
+    public String getOrderDate() {
+        return orderDate;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 
     public String getAmount() {
@@ -84,8 +84,8 @@ public class PaymentDTO {
     public String toString() {
         return "PaymentDTO{" +
                 "oId='" + oId + '\'' +
-                ", type='" + type + '\'' +
-                ", time='" + time + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", orderDate='" + orderDate + '\'' +
                 ", amount='" + amount + '\'' +
                 ", get_npoint='" + get_npoint + '\'' +
                 ", use_npoint='" + use_npoint + '\'' +

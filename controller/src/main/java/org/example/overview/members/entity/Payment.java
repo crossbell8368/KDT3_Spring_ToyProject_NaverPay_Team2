@@ -4,8 +4,8 @@ import org.example.overview.members.dto.PaymentDTO;
 
 public class Payment {
     String oId = "";
-    String type = "";
-    String time = "";
+    String orderType = "";
+    String orderDate = "";
     String amount = "";
     String get_npoint = "";
     String use_npoint = "";
@@ -13,11 +13,11 @@ public class Payment {
     public Payment(){
     }
 
-    public Payment(String oId, String type, String time, String amount, String get_npoint, String use_npoint) {
+    public Payment(String oId, String orderType, String orderDate, String amount, String get_npoint, String use_npoint) {
         this.oId = oId;
 
-        this.type = type;
-        this.time = time;
+        this.orderType = orderType;
+        this.orderDate = orderDate;
         this.amount = amount;
         this.get_npoint = get_npoint;
         this.use_npoint = use_npoint;
@@ -27,12 +27,12 @@ public class Payment {
         return oId;
     }
 
-    public String getType() {
-        return type;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public String getTime() {
-        return time;
+    public String getOrderDate() {
+        return orderDate;
     }
 
     public String getAmount() {
@@ -55,8 +55,8 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "oId='" + oId + '\'' +
-                ", type='" + type + '\'' +
-                ", time='" + time + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", orderDate='" + orderDate + '\'' +
                 ", amount='" + amount + '\'' +
                 ", get_npoint='" + get_npoint + '\'' +
                 ", use_npoint='" + use_npoint + '\'' +
