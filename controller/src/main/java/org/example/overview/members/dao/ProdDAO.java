@@ -1,7 +1,6 @@
 package org.example.overview.members.dao;
 
 import org.example.overview.members.database.JDBCMgr;
-import org.example.overview.members.entity.Member;
 import org.example.overview.members.entity.Prod;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class ProdDAO implements IProdDAO {
@@ -22,12 +20,12 @@ public class ProdDAO implements IProdDAO {
     private ResultSet rs = null;
 
     // SQL =====================================================
-    private static final String PROD_SELECT_ALL = "select * from PROD where uId = ?";
-    private static final String PROD_SELECT = "select * from PROD where oId = ?";
-    private static final String PROD_SEARCH_DATE = "select * from PROD where ORDER_DATE between cast(? as DATE) and cast(? as DATE)";
-    private static final String PROD_INSERT = "insert into PROD values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String PROD_DELETE = "delete PROD where ORDER_NO = ?";
-    private static final String PROD_DELETE_ALL = "delete PROD where USER_ID = ?";
+    private static final String PROD_SELECT_ALL = "select * from Prod where uId = ?";
+    private static final String PROD_SELECT = "select * from Prod where oId = ?";
+    private static final String PROD_SEARCH_DATE = "select * from Prod where orderDate between cast(? as DATE) and cast(? as DATE)";
+    private static final String PROD_INSERT = "insert into Prod values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String PROD_DELETE = "delete Prod where oId = ?";
+    private static final String PROD_DELETE_ALL = "delete Prod where uId = ?";
 
     // Method =====================================================
     @Override
@@ -101,7 +99,7 @@ public class ProdDAO implements IProdDAO {
 
     @Override
     public List<Prod> selectDate(String uId, String start, String end) {
-        // 날짜로 검색한 데이터결과
+        // 날짜로 검색한 데이터결과 : YYYY-MM-DD 형태로 입력필요
         // 해당 ID에 해당되는 모든 상품정보 LOAD
         List<Prod> prodList = new LinkedList<>();
         // int cnt = 0;
