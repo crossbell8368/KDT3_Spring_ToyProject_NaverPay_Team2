@@ -52,12 +52,12 @@ public class PaymentVO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentVO paymentVO = (PaymentVO) o;
-        return Objects.equals(oId, paymentVO.oId) && Objects.equals(orderTypetype, paymentVO.orderTypetype) && Objects.equals(orderDate, paymentVO.orderDate) && Objects.equals(amount, paymentVO.amount) && Objects.equals(get_npoint, paymentVO.get_npoint) && Objects.equals(use_npoint, paymentVO.use_npoint);
+        return Objects.equals(oId, paymentVO.oId) && Objects.equals(orderType, paymentVO.orderType) && Objects.equals(orderDate, paymentVO.orderDate) && Objects.equals(amount, paymentVO.amount) && Objects.equals(get_npoint, paymentVO.get_npoint) && Objects.equals(use_npoint, paymentVO.use_npoint);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(oId, orderType, orderDate amount, get_npoint, use_npoint);
+        return Objects.hash(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 
     @Override

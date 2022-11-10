@@ -48,7 +48,7 @@ public class Payment {
     }
 
     public PaymentDTO toDTO(){
-        return new PaymentDTO(oId, type, time, amount, get_npoint, use_npoint);
+        return new PaymentDTO(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 
     @Override
