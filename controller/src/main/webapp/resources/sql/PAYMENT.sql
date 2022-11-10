@@ -40,3 +40,5 @@ INSERT INTO Payment values (23, 'Account', '2022-03-01', '11390', '113', NULL);
 INSERT INTO Payment values (24, 'Account', '2022-04-01', '104000', '1040', '2222');
 
 SELECT * FROM PAYMENT;
+
+DELETE FROM PAYMENT;
