@@ -3,14 +3,14 @@ package org.example.overview.members.entity;
 import org.example.overview.members.dto.ProdDTO;
 
 public class Prod {
-    private String oId="";
-    private String uId="";
-    private String orderDate="";
-    private String productName="";
-    private String amount="";
-    private String status="";
+    private String oId = "";
+    private String uId = "";
+    private String orderDate = "";
+    private String productName = "";
+    private String amount = "";
+    private String status = "";
     private String company;
-    private String companyTel="";
+    private String companyTel = "";
 
     public Prod() {
     }
@@ -36,8 +36,8 @@ public class Prod {
         this.companyTel = companyTel;
     }
 
-    public ProdDTO toDTO (){
-        return new ProdDTO(oId, uId, orderDate,productName, amount, status, company, companyTel);
+    public ProdDTO toDTO() {
+        return new ProdDTO(oId, uId, orderDate, productName, amount, status, company, companyTel);
     }
 
     public String getoId() {
@@ -82,5 +82,7 @@ public class Prod {
                 ", amount='" + amount + '\'' +
                 ", status='" + status + '\'' +
                 ", company='" + company + '\'' +
-
+                ", companyTel='" + companyTel + '\'' +
+                '}';
     }
+}
