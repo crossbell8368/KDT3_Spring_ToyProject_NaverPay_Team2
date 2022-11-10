@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class CookieMgr {
 //    private static CookieMgr cookie = null;
-    private static String[] mustCookiesWhenLogin = {"COOKIE_ID", "AUTO_LOGIN"};
+//     private static String[] mustCookiesWhenLogin = {"COOKIE_ID", "AUTO_LOGIN"};
 
     private CookieMgr() {}
 
@@ -19,12 +19,12 @@ public class CookieMgr {
 //        }
 //        return cookie;
 //    }
+//
+//     public void createuIdInSession(HttpServletResponse response, String[] values) {
+//         createuIdInSession(response, mustCookiesWhenLogin, values);
+//     }
 
-    public void create(HttpServletResponse response, String[] values) {
-        create(response, mustCookiesWhenLogin, values);
-    }
-
-    public void create(HttpServletResponse response, String[] names, String[] values) {
+    public void creates(HttpServletResponse response, String[] names, String[] values) {
         if (names.length != values.length) return;
 
         for (int i = 0; i < names.length; i++) {
@@ -40,11 +40,11 @@ public class CookieMgr {
         response.addCookie(cookie);
     }
 
-    public String[] get(HttpServletRequest request) {
-        return get(request, mustCookiesWhenLogin);
-    }
+    // public String[] getuIdInSession(HttpServletRequest request) {
+    //     return getuIdInSession(request, mustCookiesWhenLogin);
+    // }
 
-    public String[] get(HttpServletRequest request, String[] names) {
+    public String[] gets(HttpServletRequest request, String[] names) {
         String[] values = new String[names.length];
 
 
@@ -94,9 +94,9 @@ public class CookieMgr {
         }
     }
 
-    public int delete(HttpServletRequest request, HttpServletResponse response) {
-        return delete(request, response, mustCookiesWhenLogin);
-    }
+    // public int delete(HttpServletRequest request, HttpServletResponse response) {
+    //     return delete(request, response, mustCookiesWhenLogin);
+    // }
 
     public int delete(HttpServletRequest request, HttpServletResponse response, String name) {
         Cookie[] cookies = request.getCookies();
@@ -115,7 +115,7 @@ public class CookieMgr {
         return count;
     }
 
-    public int delete(HttpServletRequest request, HttpServletResponse response, String[] names) {
+    public int deletes(HttpServletRequest request, HttpServletResponse response, String[] names) {
         Cookie[] cookies = request.getCookies();
 
         int count = 0;

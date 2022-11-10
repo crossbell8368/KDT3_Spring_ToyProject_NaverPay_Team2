@@ -45,7 +45,7 @@ public class PaymentRestController {
             PaymentDTO paymentDTO = paymentService.getPaymentById(oId);
             ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
 
-            if (!prodDTO.getuId().equals(sessionMgr.get(session))) {
+            if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
                 System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 조회 가능합니다.");
                 return null;
             }
@@ -71,7 +71,7 @@ public class PaymentRestController {
         } else {
             ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
 
-            if (!prodDTO.getuId().equals(sessionMgr.get(session))) {
+            if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
                 System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 삭제 가능합니다.");
                 return null;
             }

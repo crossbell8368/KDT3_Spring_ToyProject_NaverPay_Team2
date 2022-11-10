@@ -2,8 +2,6 @@ package org.example.overview.sessions;
 
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Component
@@ -19,7 +17,7 @@ public class SessionMgr {
 //        return session;
 //    }
 
-    public void create(HttpSession session, String value) {
+    public void createuIdInSession(HttpSession session, String value) {
         if (session.getAttribute("SESSION_ID") == null) {
             session.setMaxInactiveInterval(1800); // 30분
             session.setAttribute("SESSION_ID", value);
@@ -37,15 +35,12 @@ public class SessionMgr {
         session.setAttribute(name, value);
     }
 
-    public void set(HttpSession session, String value) {
-        session.setAttribute("SESSION_ID", value);
-    }
 
     public String get(HttpSession session, String name) {
         return (String) session.getAttribute(name);
     }
 
-    public String get(HttpSession session) {
+    public String getuIdInSession(HttpSession session) {
         if (session.getAttribute("SESSION_ID") != null) {
             return (String) session.getAttribute("SESSION_ID");
         }

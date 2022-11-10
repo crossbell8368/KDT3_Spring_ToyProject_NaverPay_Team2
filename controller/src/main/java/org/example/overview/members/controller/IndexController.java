@@ -7,10 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.util.Locale;
 
 @Controller
 public class IndexController {
@@ -22,13 +19,13 @@ public class IndexController {
         this.sessionMgr = sessionMgr;
     }
 
-    // TODO: request -> get
+    // TODO: request -> getuIdInSession
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage(Model model, HttpSession session) {
         System.out.println("indexPage() 메서드 실행");
 
         if (session.getAttribute("SESSION_ID") != null) {
-            model.addAttribute("uId", sessionMgr.get(session));
+            model.addAttribute("uId", sessionMgr.getuIdInSession(session));
         }
 
         return "index";

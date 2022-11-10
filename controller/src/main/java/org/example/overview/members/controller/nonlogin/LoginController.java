@@ -56,7 +56,7 @@ public class LoginController {
         if (!view.equals("redirect:/payhome")) {
             MemberDTO memberDTO = memberService.login(uId, uPw);
             if (memberDTO != null) {
-                sessionMgr.create(session, uId);
+                sessionMgr.createuIdInSession(session, uId);
 
                 view = "redirect:/payhome";
                 respStatus = Status.SUCCESS;

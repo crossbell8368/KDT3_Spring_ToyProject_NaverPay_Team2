@@ -3,17 +3,13 @@ package org.example.overview.members.controller.login;
 import org.example.overview.members.dto.ProdDTO;
 import org.example.overview.members.service.ProdService;
 import org.example.overview.sessions.SessionMgr;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -40,11 +36,11 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
             System.out.println("제한된 페이지입니다. 로그인을 수행해주세요");
             return "redirect:/login";
         }
-        uId = sessionMgr.get(session);
+        uId = sessionMgr.getuIdInSession(session);
         System.out.println(uId + "님의 쇼핑 리스트 출력 결과");
 
         if (session.getAttribute("SESSION_ID") != null) {
-            model.addAttribute("uId", sessionMgr.get(session));
+            model.addAttribute("uId", sessionMgr.getuIdInSession(session));
         }
 
         List<ProdDTO> prodDTOList = prodService.getAllProds(uId);
@@ -63,7 +59,7 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
             return "redirect:/login";
         }
 
-        uId = sessionMgr.get(session);
+        uId = sessionMgr.getuIdInSession(session);
         System.out.println(uId + "님의 쇼핑 리스트 출력 결과");
         if ((start == null || start.equals("")) || (end == null || end.equals(""))){
             System.out.println("잘못된 기간입니다. 기존 리스트를 출력합니다.");
@@ -95,17 +91,17 @@ public class PayhomeController { // 유저 검색 페이지 컨트롤러
     //     JSONArray jsonArray = new JSONArray(); // List<Map<>>
     //     for (int i = 0; i < prodDTOList.size(); i++) {
     //         Map<String, String> map = new HashMap<>();
-    //         map.put("uId", prodDTOList.get(i).getuId());
-    //         map.put("oId", prodDTOList.get(i).getOrderNo());
-    //         map.put("ORDER_DATE", prodDTOList.get(i).getOrderDate());
-    //         map.put("PROD_MANUF", prodDTOList.get(i).getManufacture());
-    //         map.put("PROD_INFO", prodDTOList.get(i).getProductInfo());
-    //         map.put("PROD_COST", prodDTOList.get(i).getCost());
-    //         map.put("PROD_CNT", prodDTOList.get(i).getProductCount());
-    //         map.put("PROD_SELLER", prodDTOList.get(i).getSeller());
-    //         map.put("PROD_SELLNUM", prodDTOList.get(i).getSellNum());
-    //         map.put("PROD_STATUS", prodDTOList.get(i).getStatus());
-    //         map.put("PROD_REVIEW", prodDTOList.get(i).getReview());
+    //         map.put("uId", prodDTOList.getuIdInSession(i).getuId());
+    //         map.put("oId", prodDTOList.getuIdInSession(i).getOrderNo());
+    //         map.put("ORDER_DATE", prodDTOList.getuIdInSession(i).getOrderDate());
+    //         map.put("PROD_MANUF", prodDTOList.getuIdInSession(i).getManufacture());
+    //         map.put("PROD_INFO", prodDTOList.getuIdInSession(i).getProductInfo());
+    //         map.put("PROD_COST", prodDTOList.getuIdInSession(i).getCost());
+    //         map.put("PROD_CNT", prodDTOList.getuIdInSession(i).getProductCount());
+    //         map.put("PROD_SELLER", prodDTOList.getuIdInSession(i).getSeller());
+    //         map.put("PROD_SELLNUM", prodDTOList.getuIdInSession(i).getSellNum());
+    //         map.put("PROD_STATUS", prodDTOList.getuIdInSession(i).getStatus());
+    //         map.put("PROD_REVIEW", prodDTOList.getuIdInSession(i).getReview());
     //
     //         JSONObject jsonObject = new JSONObject(map);
     //         jsonArray.put(jsonObject);
