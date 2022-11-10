@@ -2,9 +2,11 @@ package org.example.overview.members.database;
 
 import java.sql.*;
 
-public class JDBCMgr { // h2 DB 연결
+public class JDBCMgr {
 
-    private JDBCMgr() {}
+    private JDBCMgr() {
+    }
+
     public static Connection getConnection() {
         Connection conn = null;
 
@@ -14,12 +16,9 @@ public class JDBCMgr { // h2 DB 연결
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return conn;
     }
 
-    // PreparedStatement: PreCompiled SQL 저장 객체
-    // Connection: DB 커넥션 객체
     public static void close(PreparedStatement stmt, Connection conn) {
         try {
             stmt.close();
@@ -34,9 +33,6 @@ public class JDBCMgr { // h2 DB 연결
         }
     }
 
-    // ResultSet: SQL 실행결과 저장 객체
-    // PreparedStatement: PreCompiled SQL 저장 객체
-    // Connection: DB 커넥션 객체
     public static void close(ResultSet rs, PreparedStatement stmt, Connection conn) {
         try {
             rs.close();

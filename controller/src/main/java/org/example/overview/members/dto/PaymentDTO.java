@@ -4,6 +4,7 @@ import org.example.overview.members.entity.Payment;
 import org.example.overview.members.vo.PaymentVO;
 
 public class PaymentDTO {
+
     String oId = "";
     String orderType = "";
     String orderDate = "";
@@ -11,11 +12,11 @@ public class PaymentDTO {
     String get_npoint = "";
     String use_npoint = "";
 
-    public PaymentDTO(){
-
+    public PaymentDTO() {
     }
 
-    public PaymentDTO(String oId, String orderType, String orderDate, String amount, String get_npoint, String use_npoint) {
+    public PaymentDTO(String oId, String orderType, String orderDate,
+                      String amount, String get_npoint, String use_npoint) {
         this.oId = oId;
         this.orderType = orderType;
         this.orderDate = orderDate;
@@ -24,11 +25,11 @@ public class PaymentDTO {
         this.use_npoint = use_npoint;
     }
 
-    public PaymentVO toVO(){
+    public PaymentVO toVO() {
         return new PaymentVO(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 
-    public Payment toEntity(){
+    public Payment toEntity() {
         return new Payment(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 
@@ -92,4 +93,3 @@ public class PaymentDTO {
                 '}';
     }
 }
-

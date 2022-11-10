@@ -9,7 +9,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.*;
 import java.util.EnumSet;
 
-public class WebInitializer implements WebApplicationInitializer  { // web.xml
+public class WebInitializer implements WebApplicationInitializer {
+
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         registerApplicationContext(servletContext);
@@ -29,7 +30,6 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
         AnnotationConfigWebApplicationContext webapp = new AnnotationConfigWebApplicationContext();
         webapp.register(DispatcherServletConfig.class);
 
-
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcherServlet", new DispatcherServlet(webapp));
         dispatcher.setInitParameter("contextConfigLocation", DispatcherServletConfig.class.getName());
         dispatcher.setLoadOnStartup(1);
@@ -37,12 +37,10 @@ public class WebInitializer implements WebApplicationInitializer  { // web.xml
 
     }
 
-
     private void registerCharacterEncodingFilter(ServletContext servletContext) {
         FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
         characterEncodingFilter.setInitParameter("encoding", "UTF-8");
         characterEncodingFilter.setInitParameter("forceEncoding", "true");
         characterEncodingFilter.addMappingForServletNames(EnumSet.allOf(DispatcherType.class), true, "/**");
     }
-
 }

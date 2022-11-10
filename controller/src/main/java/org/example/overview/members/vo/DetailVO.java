@@ -1,6 +1,7 @@
 package org.example.overview.members.vo;
 
 public class DetailVO {
+
     ProdVO prodVO;
     PaymentVO paymentVO;
 

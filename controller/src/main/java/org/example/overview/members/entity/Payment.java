@@ -10,12 +10,12 @@ public class Payment {
     String get_npoint = "";
     String use_npoint = "";
 
-    public Payment(){
+    public Payment() {
     }
 
-    public Payment(String oId, String orderType, String orderDate, String amount, String get_npoint, String use_npoint) {
+    public Payment(String oId, String orderType, String orderDate,
+                   String amount, String get_npoint, String use_npoint) {
         this.oId = oId;
-
         this.orderType = orderType;
         this.orderDate = orderDate;
         this.amount = amount;
@@ -47,7 +47,7 @@ public class Payment {
         return use_npoint;
     }
 
-    public PaymentDTO toDTO(){
+    public PaymentDTO toDTO() {
         return new PaymentDTO(oId, orderType, orderDate, amount, get_npoint, use_npoint);
     }
 

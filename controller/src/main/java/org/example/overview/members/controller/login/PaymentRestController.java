@@ -1,11 +1,10 @@
 package org.example.overview.members.controller.login;
 
-
 import org.example.overview.members.dto.PaymentDTO;
 import org.example.overview.members.dto.ProdDTO;
-import org.example.overview.members.vo.DetailVO;
 import org.example.overview.members.service.PaymentService;
 import org.example.overview.members.service.ProdService;
+import org.example.overview.members.vo.DetailVO;
 import org.example.overview.sessions.SessionMgr;
 import org.example.overview.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class PaymentRestController {
     private SessionMgr sessionMgr;
 
     @Autowired
-    public PaymentRestController(PaymentService paymentService, ProdService prodService, SessionMgr sessionMgr){
+    public PaymentRestController(PaymentService paymentService, ProdService prodService, SessionMgr sessionMgr) {
         this.paymentService = paymentService;
         this.prodService = prodService;
         this.sessionMgr = sessionMgr;
@@ -40,6 +39,7 @@ public class PaymentRestController {
 
         if (session.getAttribute("SESSION_ID") == null) {
             System.out.println("제한된 페이지입니다. 로그인을 수행해주세요");
+
             response.sendRedirect("/login");
         } else {
             PaymentDTO paymentDTO = paymentService.getPaymentById(oId);
@@ -47,6 +47,7 @@ public class PaymentRestController {
 
             if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
                 System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 조회 가능합니다.");
+
                 return null;
             }
 
@@ -67,22 +68,27 @@ public class PaymentRestController {
 
         if (session.getAttribute("SESSION_ID") == null) {
             System.out.println("제한된 페이지입니다. 로그인을 수행해주세요");
+
             response.sendRedirect("/login");
         } else {
             ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
 
             if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
                 System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 삭제 가능합니다.");
+
                 return null;
             }
 
             if (agree == null || !agree.equals("yes")) {
                 System.out.println("삭제를 원하시면 'yes' 를 입력해주세요.");
+
                 return new ResponseEntity<>(Status.NULL, HttpStatus.BAD_REQUEST);
             }
 
-            Status status = (paymentService.deletePaymentById(oId) && prodService.removeProdByOrderNo(oId)) ? Status.SUCCESS : Status.FAIL;
+            Status status = (paymentService.deletePaymentById(oId) && prodService.removeProdByOrderNo(oId))
+                    ? Status.SUCCESS : Status.FAIL;
             System.out.println(oId + "번 상품의 쇼핑 정보를 삭제하는데 " + status + " 하였습니다.");
+
             return new ResponseEntity<>(status, HttpStatus.OK);
         }
         return null;

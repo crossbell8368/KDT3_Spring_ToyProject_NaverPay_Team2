@@ -3,16 +3,19 @@ package org.example.overview.members.vo;
 import java.util.Objects;
 
 public class ProdVO {
-    private String oId="";
-    private String uId="";
-    private String orderDate="";
-    private String productName="";
-    private String amount="";
-    private String status="";
-    private String company;
-    private String companyTel="";
 
-    public ProdVO(String oId, String uId, String orderDate, String productName, String amount, String status, String company, String companyTel) {
+    private String oId = "";
+    private String uId = "";
+    private String orderDate = "";
+    private String productName = "";
+    private String amount = "";
+    private String status = "";
+    private String company;
+    private String companyTel = "";
+
+    public ProdVO(String oId, String uId, String orderDate,
+                  String productName, String amount, String status,
+                  String company, String companyTel) {
         this.oId = oId;
         this.uId = uId;
         this.orderDate = orderDate;
@@ -23,7 +26,8 @@ public class ProdVO {
         this.companyTel = companyTel;
     }
 
-    public ProdVO(String oId, String orderDate, String productName, String amount, String status, String company, String companyTel) {
+    public ProdVO(String oId, String orderDate, String productName,
+                  String amount, String status, String company, String companyTel) {
         this.oId = oId;
         this.orderDate = orderDate;
         this.productName = productName;

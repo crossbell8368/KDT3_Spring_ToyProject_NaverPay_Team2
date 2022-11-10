@@ -8,21 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class CookieMgr {
-//    private static CookieMgr cookie = null;
-//     private static String[] mustCookiesWhenLogin = {"COOKIE_ID", "AUTO_LOGIN"};
 
-    private CookieMgr() {}
+    private CookieMgr() {
+    }
 
-//    public static CookieMgr getInstance() {
-//        if (cookie == null) {
-//            cookie = new CookieMgr();
-//        }
-//        return cookie;
-//    }
-//
-//     public void createuIdInSession(HttpServletResponse response, String[] values) {
-//         createuIdInSession(response, mustCookiesWhenLogin, values);
-//     }
+    public void create(HttpServletResponse response, String name, String value) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(24 * 60 * 60);
+        cookie.setPath("/");
+
+        response.addCookie(cookie);
+    }
 
     public void creates(HttpServletResponse response, String[] names, String[] values) {
         if (names.length != values.length) return;
@@ -32,39 +28,6 @@ public class CookieMgr {
         }
     }
 
-    public void create(HttpServletResponse response, String name, String value) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setMaxAge(24 * 60 * 60); // 초 단위,  24 시간
-        cookie.setPath("/"); // / 경로 이하에 모두 쿠키 전달
-
-        response.addCookie(cookie);
-    }
-
-    // public String[] getuIdInSession(HttpServletRequest request) {
-    //     return getuIdInSession(request, mustCookiesWhenLogin);
-    // }
-
-    public String[] gets(HttpServletRequest request, String[] names) {
-        String[] values = new String[names.length];
-
-
-        if (names == null) return null;
-
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) return null;
-
-        for (int i = 0; i < names.length; i++) {
-            if (names[i] == null) continue; 
-
-            for (Cookie cookie: cookies) {
-                if (cookie.getName() == null) continue;
-                if (names[i].equals(cookie.getName())) {
-                    values[i] = cookie.getValue();
-                }
-            }
-        }
-        return values;
-    }
 
     public String get(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
@@ -78,6 +41,26 @@ public class CookieMgr {
             }
         }
         return null;
+    }
+
+    public String[] gets(HttpServletRequest request, String[] names) {
+        String[] values = new String[names.length];
+        if (names == null) return null;
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) return null;
+
+        for (int i = 0; i < names.length; i++) {
+            if (names[i] == null) continue;
+
+            for (Cookie cookie : cookies) {
+                if (cookie.getName() == null) continue;
+                if (names[i].equals(cookie.getName())) {
+                    values[i] = cookie.getValue();
+                }
+            }
+        }
+        return values;
     }
 
     public void set(HttpServletRequest request, HttpServletResponse response, String name, String value) {
@@ -94,15 +77,11 @@ public class CookieMgr {
         }
     }
 
-    // public int delete(HttpServletRequest request, HttpServletResponse response) {
-    //     return delete(request, response, mustCookiesWhenLogin);
-    // }
-
     public int delete(HttpServletRequest request, HttpServletResponse response, String name) {
         Cookie[] cookies = request.getCookies();
-
         int count = 0;
-        for (Cookie cookie: cookies) {
+
+        for (Cookie cookie : cookies) {
             if (name != null) {
                 if (cookie.getName().equals(name)) {
                     count++;
@@ -117,9 +96,9 @@ public class CookieMgr {
 
     public int deletes(HttpServletRequest request, HttpServletResponse response, String[] names) {
         Cookie[] cookies = request.getCookies();
-
         int count = 0;
-        for (Cookie cookie: cookies) {
+
+        for (Cookie cookie : cookies) {
             if (names != null) {
                 for (int i = 0; i < names.length; i++) {
                     if (cookie.getName().equals(names[i])) {

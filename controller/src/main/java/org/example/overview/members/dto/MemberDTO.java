@@ -12,7 +12,6 @@ public class MemberDTO {
     private String uEmail = "";
     private String uPhoneNumber = "";
 
-
     public MemberDTO() {
     }
 

@@ -6,14 +6,6 @@ import java.util.List;
 
 public interface IProdService {
 
-    /*
-    boolean autoLogin(String autoLogin, String cookieId);
-    MemberDTO login(String uId);
-    MemberDTO login(String uId, String uPw);
-    boolean signup(String uId, String uPw, String uEmail);
-    boolean updateUserPassword(String uId, Password uPw, Password uNewPw);
-     */
-
     List<ProdDTO> getProdlistByDate(String uId, String start, String end);
 
     ProdDTO getProdByOrderNo(String oId);

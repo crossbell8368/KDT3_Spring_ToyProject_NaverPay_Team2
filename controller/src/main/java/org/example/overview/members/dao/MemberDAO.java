@@ -25,6 +25,7 @@ public class MemberDAO implements IMemberDAO {
     @Override
     public Member select(String inputId) {
         Member member = null;
+
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_SELECT);
@@ -49,12 +50,12 @@ public class MemberDAO implements IMemberDAO {
     @Override
     public List<Member> selectAll() {
         List<Member> members = new LinkedList<>();
+
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_SELECT_ALL);
 
             rs = stmt.executeQuery();
-
             while (rs.next()) {
                 String uId = rs.getString("uId");
                 String uPw = rs.getString("uPw");
@@ -64,6 +65,8 @@ public class MemberDAO implements IMemberDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            JDBCMgr.close(rs, stmt, conn);
         }
         return members;
     }
@@ -71,6 +74,7 @@ public class MemberDAO implements IMemberDAO {
     @Override
     public int insert(Member member) {
         int count = 0;
+
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(MEMBER_INSERT);
@@ -88,5 +92,3 @@ public class MemberDAO implements IMemberDAO {
         return count;
     }
 }
-
-

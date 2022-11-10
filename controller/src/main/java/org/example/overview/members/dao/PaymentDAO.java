@@ -9,9 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 @Repository
-public class PaymentDAO implements IPaymentDAO{
+public class PaymentDAO implements IPaymentDAO {
 
     private Connection conn = null;
     private PreparedStatement stmt = null;
@@ -27,25 +26,24 @@ public class PaymentDAO implements IPaymentDAO{
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PAYMENT_SELECT);
-            stmt.setString(1,Id);
+            stmt.setString(1, Id);
 
             rs = stmt.executeQuery();
-
-            if(rs.next()){
+            if (rs.next()) {
                 String oId = rs.getString("oId");
                 String orderType = rs.getString("orderType");
                 String orderDate = rs.getString("orderDate");
                 String amount = rs.getString("amount");
                 String get_npoint = rs.getString("get_npoint");
                 String use_npoint = rs.getString("use_npoint");
-                payment = new Payment(oId, orderType,orderDate, amount, get_npoint, use_npoint);
+                payment = new Payment(oId, orderType, orderDate, amount, get_npoint, use_npoint);
             }
             conn.commit();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             JDBCMgr.close(rs, stmt, conn);
         }
         return payment;
@@ -54,25 +52,20 @@ public class PaymentDAO implements IPaymentDAO{
     @Override
     public int delete(String id) {
         int res = 0;
-        try{
+
+        try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PAYMENT_DELETE);
-            stmt.setString(1,id);
+            stmt.setString(1, id);
             res = stmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             JDBCMgr.close(rs, stmt, conn);
         }
         return res;
-    }
-
-    public static void main(String[] args) {
-        PaymentDAO a = new PaymentDAO();
-        System.out.println(a.select("1"));
     }
 }

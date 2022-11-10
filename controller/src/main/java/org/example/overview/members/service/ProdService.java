@@ -24,15 +24,16 @@ public class ProdService implements IProdService {
         if (start == null || end == null || uId == null) return null;
 
         List<Prod> prodList = prodDAO.selectDate(uId, start, end);
+
         return prodList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
-
 
     @Override
     public ProdDTO getProdByOrderNo(String oId) {
         if (oId == null) return null;
 
         Prod prod = prodDAO.select(oId);
+
         return prod.toDTO();
     }
 
@@ -41,9 +42,9 @@ public class ProdService implements IProdService {
         if (uId == null) return null;
 
         List<Prod> prodList = prodDAO.selectAll(uId);
+
         return prodList.stream().map(m -> m.toDTO()).collect(Collectors.toList());
     }
-
 
     @Override
     public boolean removeProdByOrderNo(String oId) {
@@ -53,12 +54,14 @@ public class ProdService implements IProdService {
         if (prod == null) return false;
 
         int res = prodDAO.delete(oId);
+
         return res > 0;
     }
 
     @Override
     public boolean removeProds(String uId) {
         int res = prodDAO.deleteAll(uId);
+
         return res > 0;
     }
 }

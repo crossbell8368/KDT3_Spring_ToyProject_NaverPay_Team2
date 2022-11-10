@@ -3,17 +3,19 @@ package org.example.overview.members.vo;
 import java.util.Objects;
 
 public class PaymentVO {
+
     String oId = "";
     String orderType = "";
     String orderDate = "";
     String amount = "";
     String get_npoint = "";
     String use_npoint = "";
-    public PaymentVO(){
 
+    public PaymentVO() {
     }
 
-    public PaymentVO(String oId, String orderType, String orderDate, String amount, String get_npoint, String use_npoint) {
+    public PaymentVO(String oId, String orderType, String orderDate,
+                     String amount, String get_npoint, String use_npoint) {
         this.oId = oId;
         this.orderType = orderType;
         this.orderDate = orderDate;
@@ -25,7 +27,6 @@ public class PaymentVO {
     public String getoId() {
         return oId;
     }
-
 
     public String getOrderType() {
         return orderType;
@@ -72,4 +73,3 @@ public class PaymentVO {
                 '}';
     }
 }
-

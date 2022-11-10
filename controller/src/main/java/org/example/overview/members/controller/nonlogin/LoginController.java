@@ -39,14 +39,15 @@ public class LoginController {
 
         if (session.getAttribute("SESSION_ID") != null) {
             System.out.println("이미 로그인 되어있습니다.");
+
             return "redirect:/payhome";
         }
-
         return view;
     }
 
     @PostMapping("/login")
-    public String doLogin(@RequestParam String uId, @RequestParam String uPw, Model model,
+    public String doLogin(@RequestParam String uId,
+                          @RequestParam String uPw, Model model,
                           HttpServletRequest request, HttpSession session) {
         System.out.println("doLogin() 메서드 실행");
 
@@ -57,7 +58,6 @@ public class LoginController {
             MemberDTO memberDTO = memberService.login(uId, uPw);
             if (memberDTO != null) {
                 sessionMgr.createuIdInSession(session, uId);
-
                 view = "redirect:/payhome";
                 respStatus = Status.SUCCESS;
             }
@@ -65,13 +65,12 @@ public class LoginController {
             session.setAttribute("login", respStatus);
             model.addAttribute("uId", session.getAttribute("SESSION_ID"));
 
-
             System.out.println("로그인 성공 여부 : " + session.getAttribute("login"));
+
             if (session.getAttribute("login") == Status.SUCCESS) {
                 System.out.println(memberService.findUserByuId(memberDTO.getuId()).toVo());
             }
         }
-
         return view;
     }
 }

@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PaymentService implements IPaymentService{
+public class PaymentService implements IPaymentService {
 
     private PaymentDAO paymentDAO;
 
     @Autowired
-    public PaymentService(PaymentDAO paymentDAO){
+    public PaymentService(PaymentDAO paymentDAO) {
         this.paymentDAO = paymentDAO;
     }
 
@@ -20,7 +20,7 @@ public class PaymentService implements IPaymentService{
     public PaymentDTO getPaymentById(String oId) {
         if (oId == null) return null;
 
-        Payment payment= paymentDAO.select(oId);
+        Payment payment = paymentDAO.select(oId);
         if (payment == null) return null;
 
         return payment.toDTO();
@@ -28,12 +28,13 @@ public class PaymentService implements IPaymentService{
 
     @Override
     public boolean deletePaymentById(String oId) {
-        if(oId== null ) return false;
+        if (oId == null) return false;
 
         Payment payment = paymentDAO.select(oId);
-        if( payment == null) return false;
+        if (payment == null) return false;
 
         int res = paymentDAO.delete(oId);
+
         return res > 0;
     }
 }
