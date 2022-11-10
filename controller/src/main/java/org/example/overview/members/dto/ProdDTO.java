@@ -3,50 +3,45 @@ package org.example.overview.members.dto;
 import org.example.overview.members.vo.ProdVO;
 
 public class ProdDTO {
-    private String uId="";
     private String oId="";
+    private String uId="";
     private String orderDate="";
-    private String manufacture="";
-    private String productInfo="";
-    private String cost="";
-    private int productCount;
-    private String seller="";
-    private String sellNum="";
-    private int status;
-    private int review;
+    private String productName="";
+    private String amount="";
+    private String status="";
+    private String company;
+    private String companyTel="";
 
-    public ProdDTO(){
-    }
-
-    public ProdDTO(String uId, String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status, int review) {
+    public ProdDTO(String oId, String uId, String orderDate, String productName, String amount, String status, String company, String companyTel) {
+        this.oId = oId;
         this.uId = uId;
-        this.oId = oId;
         this.orderDate = orderDate;
-        this.manufacture = manufacture;
-        this.productInfo = productInfo;
-        this.cost = cost;
-        this.productCount = productCount;
-        this.seller = seller;
-        this.sellNum = sellNum;
+        this.productName = productName;
+        this.amount = amount;
         this.status = status;
-        this.review = review;
+        this.company = company;
+        this.companyTel = companyTel;
     }
 
-    public ProdDTO(String oId, String orderDate, String manufacture, String productInfo, String cost, int productCount, String seller, String sellNum, int status) {
+    public ProdDTO(String oId, String orderDate, String productName, String amount, String status, String company, String companyTel) {
         this.oId = oId;
         this.orderDate = orderDate;
-        this.manufacture = manufacture;
-        this.productInfo=productInfo;
-        this.cost = cost;
-        this.productCount = productCount;
-        this.seller = seller;
-        this.sellNum = sellNum;
+        this.productName = productName;
+        this.amount = amount;
         this.status = status;
+        this.company = company;
+        this.companyTel = companyTel;
     }
 
-    //public Prod toEntity(){return new Shopping(orderNo,orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);}
-    public ProdVO toVO() {
-        return new ProdVO(oId, orderDate, manufacture,productInfo,cost,productCount,seller,sellNum,status);
+
+    public ProdVO toVO() { return new ProdVO(oId, orderDate, productName, amount, status, company, companyTel);}
+
+    public String getoId() {
+        return oId;
+    }
+
+    public void setoId(String oId) {
+        this.oId = oId;
     }
 
     public String getuId() {
@@ -57,14 +52,6 @@ public class ProdDTO {
         this.uId = uId;
     }
 
-    public String getOrderNo() {
-        return oId;
-    }
-
-    public void setOrderNo(String oId) {
-        this.oId = oId;
-    }
-
     public String getOrderDate() {
         return orderDate;
     }
@@ -73,84 +60,57 @@ public class ProdDTO {
         this.orderDate = orderDate;
     }
 
-    public String getManufacture() {
-        return manufacture;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setManufacture(String manufacture) {
-        this.manufacture = manufacture;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getProductInfo() {
-        return productInfo;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setProductInfo(String productInfo) {
-        this.productInfo = productInfo;
-    }
-
-    public String getCost() {
-        return cost;
-    }
-
-    public void setCost(String cost) {
-        this.cost = cost;
-    }
-
-    public String getProductCount() {
-        return String.valueOf(productCount);
-    }
-
-    public void setProductCount(int productCount) {
-        this.productCount = productCount;
-    }
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
-    public String getSellNum() {
-        return sellNum;
-    }
-
-    public void setSellNum(String sellNum) {
-        this.sellNum = sellNum;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
     public String getStatus() {
-        return String.valueOf(status);
+        return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getReview() {
-        return String.valueOf(review);
+    public String getCompany() {
+        return company;
     }
 
-    public void setReview(int review) {
-        this.review = review;
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getCompanyTel() {
+        return companyTel;
+    }
+
+    public void setCompanyTel(String companyTel) {
+        this.companyTel = companyTel;
     }
 
     @Override
     public String toString() {
         return "ProdDTO{" +
-                "uId='" + uId + '\'' +
-                ", oId=" + oId +
+                "oId='" + oId + '\'' +
+                ", uId='" + uId + '\'' +
                 ", orderDate='" + orderDate + '\'' +
-                ", manufacture='" + manufacture + '\'' +
-                ", productInfo='" + productInfo + '\'' +
-                ", cost='" + cost + '\'' +
-                ", productCount=" + productCount +
-                ", seller='" + seller + '\'' +
-                ", sellNum='" + sellNum + '\'' +
-                ", status=" + status +
-                ", review=" + review +
+                ", productName='" + productName + '\'' +
+                ", amount='" + amount + '\'' +
+                ", status='" + status + '\'' +
+                ", company='" + company + '\'' +
+                ", companyTel='" + companyTel + '\'' +
                 '}';
     }
 }

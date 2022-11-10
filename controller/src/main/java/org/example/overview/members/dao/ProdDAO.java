@@ -44,17 +44,14 @@ public class ProdDAO implements IProdDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 prodList.add(new Prod(
-                        rs.getString("uId"),
                         rs.getString("oId"),
-                        rs.getString("ORDER_DATE"),
-                        rs.getString("PROD_MANUF"),
-                        rs.getString("PROD_INFO"),
-                        rs.getString("PROD_COST"),
-                        rs.getString("PROD_CNT"),
-                        rs.getString("PROD_SELLER"),
-                        rs.getString("PROD_SELLNUM"),
-                        rs.getString("PROD_STATUS"),
-                        rs.getString("PROD_REVIEW")
+                        rs.getString("uId"),
+                        rs.getString("orderDate"),
+                        rs.getString("productName"),
+                        rs.getString("amount"),
+                        rs.getString("status"),
+                        rs.getString("company"),
+                        rs.getString("companyTel")
                 ));
                 // System.out.println(prodList.get(cnt).toString());
                 // cnt++;
@@ -83,17 +80,14 @@ public class ProdDAO implements IProdDAO {
 
             if (rs.next()) {
                 prod = new Prod(
-                        rs.getString("uId"),
                         rs.getString("oId"),
-                        rs.getString("ORDER_DATE"),
-                        rs.getString("PROD_MANUF"),
-                        rs.getString("PROD_INFO"),
-                        rs.getString("PROD_COST"),
-                        rs.getString("PROD_CNT"),
-                        rs.getString("PROD_SELLER"),
-                        rs.getString("PROD_SELLNUM"),
-                        rs.getString("PROD_STATUS"),
-                        rs.getString("PROD_REVIEW")
+                        rs.getString("uId"),
+                        rs.getString("orderDate"),
+                        rs.getString("productName"),
+                        rs.getString("amount"),
+                        rs.getString("status"),
+                        rs.getString("company"),
+                        rs.getString("companyTel")
                 );
                 System.out.println(prod.toString());
             }
@@ -122,17 +116,14 @@ public class ProdDAO implements IProdDAO {
             while (rs.next()) {
                 if(rs.getString("uId").equals(uId)){
                     prodList.add(new Prod(
-                            rs.getString("uId"),
                             rs.getString("oId"),
-                            rs.getString("ORDER_DATE"),
-                            rs.getString("PROD_MANUF"),
-                            rs.getString("PROD_INFO"),
-                            rs.getString("PROD_COST"),
-                            rs.getString("PROD_CNT"),
-                            rs.getString("PROD_SELLER"),
-                            rs.getString("PROD_SELLNUM"),
-                            rs.getString("PROD_STATUS"),
-                            rs.getString("PROD_REVIEW")
+                            rs.getString("uId"),
+                            rs.getString("orderDate"),
+                            rs.getString("productName"),
+                            rs.getString("amount"),
+                            rs.getString("status"),
+                            rs.getString("company"),
+                            rs.getString("companyTel")
                     ));
                     // System.out.println(prodList.get(cnt).toString());
                     // cnt++;
@@ -152,17 +143,14 @@ public class ProdDAO implements IProdDAO {
         try {
             conn = JDBCMgr.getConnection();
             stmt = conn.prepareStatement(PROD_INSERT);
-            stmt.setString(1, prod.getuId());
-            stmt.setString(2, prod.getOrderNo());
+            stmt.setString(1, prod.getoId());
+            stmt.setString(2, prod.getuId());
             stmt.setString(3, prod.getOrderDate());
-            stmt.setString(1, prod.getManufacture());
-            stmt.setString(2, prod.getProductInfo());
-            stmt.setString(3, prod.getCost());
-            stmt.setString(1, prod.getProductCount());
-            stmt.setString(2, prod.getSeller());
-            stmt.setString(3, prod.getSellNum());
-            stmt.setString(1, prod.getStatus());
-            stmt.setString(2, prod.getReview());
+            stmt.setString(1, prod.getProductName());
+            stmt.setString(2, prod.getAmount());
+            stmt.setString(3, prod.getStatus());
+            stmt.setString(1, prod.getCompany());
+            stmt.setString(2, prod.getCompanyTel());
             res = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
