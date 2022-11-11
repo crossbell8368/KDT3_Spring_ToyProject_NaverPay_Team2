@@ -21,8 +21,9 @@ public class PaymentService implements IPaymentService {
         if (oId == null) return null;
 
         Payment payment = paymentDAO.select(oId);
-        if (payment == null) return null;
-
+        if (payment == null) {
+            return new PaymentDTO();
+        }
         return payment.toDTO();
     }
 

@@ -46,15 +46,18 @@ public class PaymentRestController {
             PaymentDTO paymentDTO = paymentService.getPaymentById(oId);
             ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
 
-            if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
-                System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 조회 가능합니다.");
+            if(prodDTO.getoId().equals("") || paymentDTO.getoId().equals("")){
+                System.out.println("해당 정보가 존재하지 않습니다. 주문번호를 확인하세요.");
 
+                response.sendRedirect("/payhome");
                 return null;
             }
 
-            if(prodDTO == null || paymentDTO == null){
-                System.out.println("해당 정보가 존재하지 않습니다. 주문번호를 확인하세요.");
-                response.sendRedirect("redirect:/payhome");
+            if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
+                System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 조회 가능합니다.");
+
+                response.sendRedirect("/payhome");
+                return null;
             }
 
             DetailVO detailVO = new DetailVO(prodDTO.toVO(), paymentDTO.toVO());
@@ -79,14 +82,17 @@ public class PaymentRestController {
         } else {
             ProdDTO prodDTO = prodService.getProdByOrderNo(oId);
 
-            if(prodDTO == null){
+            if(prodDTO.getoId().equals("")){
                 System.out.println("해당 정보가 존재하지 않습니다. 주문번호를 확인하세요.");
-                return new ResponseEntity<>(Status.FAIL,HttpStatus.BAD_REQUEST);
+
+                response.sendRedirect("/payhome");
+                return null;
             }
 
             if (!prodDTO.getuId().equals(sessionMgr.getuIdInSession(session))) {
                 System.out.println("올바르지않은 접근입니다. 본인의 쇼핑 정보만 삭제 가능합니다.");
 
+                response.sendRedirect("/payhome");
                 return null;
             }
 

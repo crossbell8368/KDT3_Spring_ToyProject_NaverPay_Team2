@@ -33,7 +33,9 @@ public class ProdService implements IProdService {
         if (oId == null) return null;
 
         Prod prod = prodDAO.select(oId);
-
+        if (prod == null) {
+            return new ProdDTO();
+        }
         return prod.toDTO();
     }
 

@@ -13,6 +13,9 @@ public class ProdDTO {
     private String company;
     private String companyTel = "";
 
+    public ProdDTO() {
+    }
+
     public ProdDTO(String oId, String uId, String orderDate,
                    String productName, String amount, String status,
                    String company, String companyTel) {
